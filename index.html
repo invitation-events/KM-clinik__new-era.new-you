@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>KM+ clinic | POP-up Event 15.08.2026</title>
 
     <!-- Open Graph -->
@@ -56,15 +56,27 @@
             background-color: #0a0a0a;
         }
 
-        /* ----- ПЕРВЫЙ ЭКРАН (100vh на всех устройствах) ----- */
+        /* ----- ПЕРВЫЙ ЭКРАН (100% высоты экрана на всех устройствах) ----- */
         .first-screen {
             position: relative;
             width: 100%;
             height: 100vh;
+            height: 100dvh;
             min-height: 100vh;
+            min-height: 100dvh;
             max-height: 100vh;
+            max-height: 100dvh;
             overflow: hidden;
             background-color: #0a0a0a;
+        }
+
+        /* Fallback для старых браузеров */
+        @supports not (height: 100dvh) {
+            .first-screen {
+                height: 100vh;
+                min-height: 100vh;
+                max-height: 100vh;
+            }
         }
 
         .photo-bg {
