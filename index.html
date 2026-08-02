@@ -579,7 +579,7 @@
             }
         }
 
-        /* ----- ПРОГРАММА (ГАЛЕРЕЯ - ФОТО ПО ЦЕНТРУ, НИЖНИЕ ОПУЩЕНЫ) ----- */
+        /* ----- ПРОГРАММА (ГАЛЕРЕЯ) ----- */
         .program-screen {
             background: #fff;
             padding: 35px 16px 45px;
@@ -645,49 +645,52 @@
             transform: scale(1);
         }
 
-        /* ВСЕ ФОТО ПО ЦЕНТРУ */
+        /* ЦЕНТРАЛЬНОЕ ФОТО — ОПУЩЕНО НИЖЕ */
         .gallery-card.card-center {
-            width: 70%;
-            height: 72%;
-            left: 15%;
-            top: 4%;
+            width: 68%;
+            height: 70%;
+            left: 16%;
+            top: 6%;
             z-index: 10;
         }
+
+        /* ВЕРХНИЕ ФОТО */
         .gallery-card.card-left-top {
-            width: 50%;
-            height: 50%;
-            left: 0%;
-            top: 2%;
+            width: 48%;
+            height: 48%;
+            left: 1%;
+            top: 4%;
             z-index: 4;
         }
         .gallery-card.card-right-top {
-            width: 50%;
-            height: 50%;
-            right: 0%;
-            top: 2%;
+            width: 48%;
+            height: 48%;
+            right: 1%;
+            top: 4%;
             z-index: 2;
         }
 
-        /* НИЖНИЕ ФОТО — ОПУЩЕНЫ НИЖЕ НА 15px (используем % для адаптивности) */
+        /* НИЖНИЕ ФОТО — ОПУЩЕНЫ, НЕ ПЕРЕКРЫВАЮТ ДРУГ ДРУГА */
         .gallery-card.card-left-bottom {
-            width: 55%;
-            height: 52%;
-            left: -2%;
-            bottom: -4%;
+            width: 52%;
+            height: 48%;
+            left: 1%;
+            bottom: 2%;
             z-index: 5;
         }
         .gallery-card.card-right-bottom {
-            width: 55%;
-            height: 52%;
-            right: -2%;
-            bottom: -4%;
+            width: 52%;
+            height: 48%;
+            right: 1%;
+            bottom: 2%;
             z-index: 3;
         }
+
         .gallery-card.card-placeholder {
-            width: 30%;
-            height: 28%;
-            right: 35%;
-            bottom: 2%;
+            width: 28%;
+            height: 26%;
+            right: 36%;
+            bottom: 4%;
             z-index: 1;
             background: #f8f8f8;
             border: 2px dashed #d0d0d0;
@@ -703,20 +706,20 @@
 
         @media (max-width: 580px) {
             .gallery-grid { aspect-ratio: 1 / 1.1; max-height: 480px; }
-            .gallery-card.card-center { width: 65%; height: 65%; left: 17.5%; top: 6%; }
-            .gallery-card.card-left-top { width: 45%; height: 44%; top: 2%; left: 0%; }
-            .gallery-card.card-right-top { width: 45%; height: 44%; top: 2%; right: 0%; }
-            .gallery-card.card-left-bottom { width: 50%; height: 46%; bottom: -2%; left: 0%; }
-            .gallery-card.card-right-bottom { width: 50%; height: 46%; bottom: -2%; right: 0%; }
+            .gallery-card.card-center { width: 62%; height: 62%; left: 19%; top: 8%; }
+            .gallery-card.card-left-top { width: 44%; height: 42%; top: 4%; left: 1%; }
+            .gallery-card.card-right-top { width: 44%; height: 42%; top: 4%; right: 1%; }
+            .gallery-card.card-left-bottom { width: 48%; height: 44%; bottom: 2%; left: 1%; }
+            .gallery-card.card-right-bottom { width: 48%; height: 44%; bottom: 2%; right: 1%; }
             .gallery-card.card-placeholder { display: none; }
         }
         @media (max-width: 420px) {
             .gallery-grid { aspect-ratio: 1 / 1.1; max-height: 400px; }
-            .gallery-card.card-center { width: 60%; height: 58%; left: 20%; top: 6%; }
-            .gallery-card.card-left-top { width: 40%; height: 38%; top: 2%; left: 0%; }
-            .gallery-card.card-right-top { width: 40%; height: 38%; top: 2%; right: 0%; }
-            .gallery-card.card-left-bottom { width: 44%; height: 40%; bottom: -2%; left: 0%; }
-            .gallery-card.card-right-bottom { width: 44%; height: 40%; bottom: -2%; right: 0%; }
+            .gallery-card.card-center { width: 56%; height: 56%; left: 22%; top: 10%; }
+            .gallery-card.card-left-top { width: 38%; height: 36%; top: 4%; left: 1%; }
+            .gallery-card.card-right-top { width: 38%; height: 36%; top: 4%; right: 1%; }
+            .gallery-card.card-left-bottom { width: 42%; height: 38%; bottom: 2%; left: 1%; }
+            .gallery-card.card-right-bottom { width: 42%; height: 38%; bottom: 2%; right: 1%; }
         }
 
         /* ----- АНКЕТА ГОСТЯ ----- */
