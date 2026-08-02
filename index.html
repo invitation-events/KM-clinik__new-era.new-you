@@ -24,7 +24,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@100;200;300;400;500;700;800&family=Parisienne&family=Pinyon+Script&display=swap" rel="stylesheet">
 
     <style>
-        /* ========== ОБНУЛЕНИЕ ========== */
+        @font-face {
+            font-family: 'Lighthaus';
+            src: url('Lighthaus.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Lighthaus';
+            src: url('Lighthaus.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -35,326 +49,320 @@
             width: 100%;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #0a0a0a;
-            color: #1a1a1a;
-            line-height: 1.6;
         }
 
-        /* ========== ПЕРЕМЕННЫЕ ========== */
-        :root {
-            --color-bg: #fcfbf9;
-            --color-dark: #1a1a1a;
-            --color-gray: #888;
-            --color-light: #f8f8f8;
-            --font-heading: 'Lighthaus', 'Quicksand', sans-serif;
-            --font-body: 'Montserrat', sans-serif;
-            --font-script: 'Pinyon Script', cursive;
-            --font-cursive: 'Parisienne', cursive;
-            --font-serif: 'Cormorant Garamond', serif;
-
-            --fs-hero: clamp(2.8rem, 8vw, 5rem);
-            --fs-title: clamp(1.6rem, 3.5vw, 2.2rem);
-            --fs-subtitle: clamp(1.3rem, 3vw, 1.8rem);
-            --fs-body: clamp(0.85rem, 1.5vw, 0.95rem);
-            --fs-small: clamp(0.6rem, 1vw, 0.7rem);
-            --fs-tiny: clamp(0.45rem, 0.8vw, 0.55rem);
-
-            --space-xs: clamp(0.3rem, 0.5vw, 0.5rem);
-            --space-sm: clamp(0.6rem, 1vw, 1rem);
-            --space-md: clamp(1.2rem, 2vw, 2rem);
-            --space-lg: clamp(2rem, 4vw, 3.5rem);
-            --space-xl: clamp(3rem, 6vw, 5rem);
-
-            --block-gap: clamp(3rem, 6vw, 5rem);
-        }
-
-        /* ========== КОНТЕЙНЕР ========== */
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 0 clamp(1rem, 3vw, 2rem);
-        }
-
-        /* ========== ШРИФТЫ ========== */
-        .font-heading { font-family: var(--font-heading); }
-        .font-body { font-family: var(--font-body); }
-        .font-script { font-family: var(--font-script); }
-        .font-cursive { font-family: var(--font-cursive); }
-        .font-serif { font-family: var(--font-serif); }
-
-        /* ========== ЕДИНЫЕ ЗАГОЛОВКИ ========== */
-        .title {
-            font-family: var(--font-heading);
-            font-size: var(--fs-title);
-            font-weight: 400;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--color-dark);
-            line-height: 1.2;
-            text-align: center;
-        }
-
-        .subtitle {
-            font-family: var(--font-script);
-            font-size: var(--fs-subtitle);
-            font-weight: 400;
-            color: var(--color-dark);
-            text-align: center;
-        }
-
-        .body-text {
-            font-family: var(--font-body);
-            font-size: var(--fs-body);
-            font-weight: 300;
-            color: #555;
-            line-height: 1.7;
-            text-align: center;
-        }
-
-        .small-text {
-            font-family: var(--font-body);
-            font-size: var(--fs-small);
-            font-weight: 300;
-            color: var(--color-gray);
-            text-align: center;
-        }
-
-        /* ========== РАЗДЕЛИТЕЛЬ ========== */
-        .divider {
-            width: 1px;
-            height: clamp(40px, 6vw, 60px);
-            background: var(--color-dark);
-            margin: var(--space-md) auto;
-            opacity: 0;
-            transform: scaleY(0);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-        .divider.visible {
-            opacity: 0.4;
-            transform: scaleY(1);
-        }
-
-        /* ========== АНИМАЦИИ ========== */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-        }
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-        }
-        .fade-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .fade-right {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-        }
-        .fade-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scale-in {
-            opacity: 0;
-            transform: scale(0.92);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-        }
-        .scale-in.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* ========== ПЕРВЫЙ ЭКРАН ========== */
-        .hero {
+        /* ----- ПЕРВЫЙ ЭКРАН ----- */
+        .first-screen {
             position: relative;
             width: 100%;
             height: 100vh;
-            min-height: 600px;
             overflow: hidden;
             background-color: #0a0a0a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .hero-bg {
+        .photo-bg {
             position: absolute;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('главная (1).png');
             background-size: cover;
             background-position: center 30%;
             opacity: 0;
             filter: brightness(0.6) contrast(1.1);
-            transition: opacity 2s ease;
+            transition: opacity 3.5s ease-out;
             z-index: 1;
         }
-        .hero-bg.visible { opacity: 1; }
 
-        .hero-overlay {
+        .photo-bg.visible {
+            opacity: 1;
+        }
+
+        .soft-veil {
             position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.45) 100%);
             z-index: 2;
             pointer-events: none;
         }
 
-        .hero-content {
+        .content-first {
             position: relative;
             z-index: 3;
-            text-align: center;
-            padding: 2rem;
             width: 100%;
-            max-width: 500px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
         }
 
-        .hero-script {
-            font-family: var(--font-cursive);
-            font-size: var(--fs-hero);
+        .event-script {
+            font-family: 'Parisienne', cursive;
+            font-size: 2.8rem;
             color: rgba(255,248,235,0.92);
-            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+            text-shadow: 0 1px 8px rgba(0,0,0,0.2);
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 1.2s ease, transform 1.2s ease;
-            margin-bottom: var(--space-sm);
+            transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
+            margin-bottom: 2rem;
         }
-        .hero-script.visible {
+
+        .event-script.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .hero-title {
-            font-family: var(--font-heading);
-            font-size: clamp(2.8rem, 8vw, 5rem);
+        .main-title-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.2rem;
+        }
+
+        .main-title-line {
+            font-family: 'Lighthaus', 'Quicksand', sans-serif;
             font-weight: 300;
-            letter-spacing: clamp(6px, 2vw, 12px);
+            letter-spacing: 10px;
             text-transform: uppercase;
             color: #fffcf5;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 14px rgba(0,0,0,0.45);
             opacity: 0;
-            transform: translateX(-30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
             line-height: 1.1;
+            transform: translateX(-35px);
+            transition: opacity 2s cubic-bezier(0.2,0.9,0.3,1.1), transform 2s cubic-bezier(0.2,0.9,0.3,1.1);
         }
-        .hero-title.visible {
+
+        .main-title-line.visible {
             opacity: 1;
             transform: translateX(0);
         }
 
-        .hero-tagline {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: clamp(1.6rem, 4vw, 2.6rem);
-            color: rgba(200, 200, 200, 0.8);
-            text-shadow: 0 1px 12px rgba(0,0,0,0.3);
-            letter-spacing: 3px;
-            opacity: 0;
-            transform: translateX(-30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            margin: var(--space-xs) 0;
+        .main-title-line.km-clinic {
+            font-size: 5rem;
+            letter-spacing: 10px;
         }
-        .hero-tagline.visible {
+
+        .tagline-center {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 2.6rem;
+            color: rgba(200, 200, 200, 0.7);
+            text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+            letter-spacing: 4px;
+            opacity: 0;
+            transform: translateX(-35px);
+            transition: opacity 2s cubic-bezier(0.2,0.9,0.3,1.1), transform 2s cubic-bezier(0.2,0.9,0.3,1.1);
+            margin: 0.2rem 0;
+        }
+
+        .tagline-center.visible {
             opacity: 0.8;
             transform: translateX(0);
         }
 
-        .hero-scroll {
+        .scroll-down {
             position: absolute;
-            bottom: clamp(30px, 5vh, 50px);
+            bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--color-dark);
-            padding: 8px 22px;
-            font-size: var(--fs-small);
-            font-weight: 500;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            border: none;
-            cursor: pointer;
-            z-index: 20;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.96);
+            color: #1a1a1a;
+            padding: 8px 22px;
+            border-radius: 0px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            white-space: nowrap;
+            z-index: 20;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: background 0.2s ease, transform 0.2s ease;
+            border: none;
         }
-        .hero-scroll:hover {
+
+        .scroll-down:hover {
+            background: white;
             transform: translateX(-50%) scale(1.02);
-            box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
         }
-        .hero-scroll svg {
+
+        .arrow-icon-svg {
+            margin-left: 8px;
             width: 11px;
             height: 11px;
         }
 
-        /* ========== БЛОКИ ========== */
-        .section {
-            padding: var(--block-gap) var(--space-sm);
-            background: var(--color-bg);
+        @media (max-width: 768px) {
+            .main-title-line.km-clinic { font-size: 3.8rem; letter-spacing: 6px; }
+            .tagline-center { font-size: 2rem; }
+            .event-script { font-size: 2.2rem; }
         }
-        .section-white { background: #ffffff; }
-        .section-light { background: var(--color-light); }
+        @media (max-width: 580px) {
+            .main-title-line.km-clinic { font-size: 2.8rem; letter-spacing: 4px; }
+            .tagline-center { font-size: 1.6rem; }
+            .event-script { font-size: 1.8rem; }
+        }
+        @media (max-width: 480px) {
+            .main-title-line.km-clinic { font-size: 2.2rem; letter-spacing: 3px; }
+            .tagline-center { font-size: 1.3rem; }
+            .event-script { font-size: 1.5rem; }
+        }
 
-        /* ========== ПРИГЛАШЕНИЕ ========== */
-        .invitation .greeting {
-            margin-bottom: var(--space-sm);
-        }
-        .invitation .description {
-            max-width: 340px;
-            margin: 0 auto var(--space-md);
+        /* ----- ВТОРОЙ ЭКРАН ----- */
+        .second-screen {
+            width: 100%;
+            background: #fff;
+            padding: 60px 20px;
         }
 
-        /* ========== ДАТА ========== */
+        .invitation-container {
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .greeting-title {
+            font-family: 'Lighthaus', 'Quicksand', sans-serif;
+            font-weight: 400;
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            letter-spacing: 4px;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .greeting-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .save-the-date {
+            font-family: 'Pinyon Script', cursive;
+            font-size: clamp(2rem, 4.5vw, 2.4rem);
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .description-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            max-width: 320px;
+            margin: 0 auto 30px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .line {
+            width: 1px;
+            background: #1a1a1a;
+            height: 50px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: scaleY(0);
+            transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .line-top {
+            margin-bottom: 25px;
+            transform-origin: top;
+        }
+
+        .line-bottom {
+            margin-top: 25px;
+            margin-bottom: 40px;
+            transform-origin: bottom;
+        }
+
         .date-block {
             display: flex;
+            flex-direction: row;
             justify-content: center;
             align-items: baseline;
-            gap: 4px;
+            gap: 5px;
             flex-wrap: wrap;
         }
+
         .date-number {
             font-family: 'Bodoni Moda', 'Playfair Display', serif;
-            font-size: var(--fs-title);
+            font-size: clamp(2rem, 4.5vw, 2.5rem);
             font-weight: 400;
-            color: var(--color-dark);
-            line-height: 1;
+            color: #1a1a1a;
+            line-height: 0.9;
             opacity: 0;
-            transform: translateX(-80px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
         }
+
+        .from-left-1, .from-left-2 {
+            transform: translateX(-100px);
+            transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .from-right {
+            transform: translateX(100px);
+            transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .dot {
+            font-size: 1rem;
+            color: #1a1a1a;
+            margin: 0 3px;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        .greeting-title.visible,
+        .save-the-date.visible,
+        .description-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .line.visible {
+            opacity: 0.6;
+            transform: scaleY(1);
+        }
+
         .date-number.visible {
             opacity: 1;
             transform: translateX(0);
         }
-        .date-dot {
-            font-size: var(--fs-body);
-            color: var(--color-dark);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-        .date-dot.visible { opacity: 1; }
 
-        /* ========== ЛОКАЦИЯ С ФОТО ========== */
+        .dot.visible {
+            opacity: 1;
+        }
+
+        /* ----- ЛОКАЦИЯ С ФОТО ----- */
         .location-section {
             position: relative;
-            padding: var(--block-gap) var(--space-sm);
+            padding: 50px 25px;
             background: #ffffff;
             overflow: hidden;
             min-height: 400px;
@@ -377,88 +385,238 @@
             position: relative;
             z-index: 1;
             width: 100%;
-            max-width: 500px;
+            max-width: 450px;
             margin: 0 auto;
             text-align: center;
             background: rgba(255, 255, 255, 0.92);
-            padding: var(--space-lg);
+            padding: 40px 25px;
             backdrop-filter: blur(2px);
         }
 
         .location-title {
-            font-family: var(--font-heading);
-            font-size: var(--fs-title);
+            font-family: 'Lighthaus', 'Quicksand', sans-serif;
             font-weight: 400;
-            letter-spacing: 4px;
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
             text-transform: uppercase;
-            color: var(--color-dark);
-            line-height: 1.2;
-            text-align: center;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 2s cubic-bezier(0.2,0.9,0.3,1.1), transform 2s cubic-bezier(0.2,0.9,0.3,1.1);
         }
 
-        .location-address {
-            font-family: var(--font-body);
-            font-size: var(--fs-body);
+        .location-title.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .save-the-place {
+            font-family: 'Pinyon Script', cursive;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-weight: 400;
+            margin-bottom: 20px;
+            display: inline-block;
+            transform: skewX(-3deg) translateX(60px);
+            opacity: 0;
+            transition: opacity 2s cubic-bezier(0.2,0.9,0.3,1.1), transform 2s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .save-the-place.visible {
+            opacity: 1;
+            transform: skewX(-3deg) translateX(0);
+        }
+
+        .venue-line {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
             font-weight: 400;
             color: #333;
-            text-align: center;
+            margin-bottom: 6px;
+            opacity: 0;
+            transform: translateY(55px);
+            transition: opacity 2.8s cubic-bezier(0.16,1,0.3,1.1), transform 2.8s cubic-bezier(0.16,1,0.3,1.1);
+        }
+
+        .venue-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .venue-line strong {
+            font-weight: 600;
+            color: #1a1a1a;
             white-space: nowrap;
         }
-        .location-address strong {
-            font-weight: 600;
-            color: var(--color-dark);
+
+        .venue-line.address {
+            font-weight: 300;
+            color: #555;
+            margin-bottom: 20px;
         }
 
-        /* ========== СПИКЕРЫ ========== */
-        .speaker-card {
-            background: var(--color-light);
-            padding: var(--space-md);
-            margin-bottom: var(--space-md);
-            border-left: 3px solid var(--color-dark);
-            text-align: left;
-        }
-        .speaker-card:last-child { margin-bottom: 0; }
-
-        .speaker-name {
-            font-family: var(--font-heading);
-            font-size: var(--fs-subtitle);
+        .btn-maps {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
             font-weight: 400;
             letter-spacing: 2px;
-            color: var(--color-dark);
-            margin-bottom: var(--space-xs);
+            padding: 12px 30px;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(55px);
+            transition: opacity 3s cubic-bezier(0.16,1,0.3,1.1), transform 3s cubic-bezier(0.16,1,0.3,1.1);
         }
+
+        .btn-maps.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn-maps:hover {
+            background: #333;
+        }
+
+        /* ----- СПИКЕРЫ ----- */
+        .speakers-screen {
+            background: #fff;
+            padding: 40px 20px 60px;
+        }
+
+        .speakers-container {
+            max-width: 450px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .speakers-title {
+            font-family: 'Lighthaus', 'Quicksand', sans-serif;
+            font-weight: 400;
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 2s cubic-bezier(0.25,0.8,0.4,1), transform 2s cubic-bezier(0.25,0.8,0.4,1);
+        }
+
+        .speakers-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .speaker-card {
+            background: #f8f8f8;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            border-left: 3px solid #1a1a1a;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.2,0.9,0.3,1.1), transform 0.8s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .speaker-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .speaker-name {
+            font-family: 'Lighthaus', 'Quicksand', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+            white-space: nowrap;
+        }
+
         .speaker-role {
-            font-family: var(--font-body);
-            font-size: var(--fs-small);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--color-gray);
-            margin-bottom: var(--space-xs);
+            color: #888;
+            margin-bottom: 8px;
         }
+
         .speaker-theme {
-            font-family: var(--font-body);
-            font-size: var(--fs-body);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
             font-weight: 300;
             color: #444;
-            line-height: 1.7;
+            line-height: 1.5;
         }
+
         .speaker-theme strong {
             font-weight: 500;
-            color: var(--color-dark);
+            color: #1a1a1a;
         }
+
         .speaker-theme ul {
             list-style: none;
             padding: 0;
-            margin-top: var(--space-xs);
+            margin-top: 6px;
         }
+
         .speaker-theme ul li {
-            font-size: var(--fs-body);
+            font-size: 0.8rem;
             padding: 2px 0;
             color: #555;
         }
 
-        /* ========== ПРОГРАММА (ГАЛЕРЕЯ) ========== */
+        @media (max-width: 480px) {
+            .speaker-name {
+                font-size: 1.1rem;
+                white-space: normal;
+            }
+        }
+
+        /* ----- ПРОГРАММА (ГАЛЕРЕЯ) ----- */
+        .program-screen {
+            background: #fff;
+            padding: 40px 16px 60px;
+        }
+
+        .program-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .program-title {
+            font-family: 'Lighthaus', 'Quicksand', sans-serif;
+            font-weight: 400;
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #121212;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 2s cubic-bezier(0.25, 0.8, 0.4, 1), transform 2s cubic-bezier(0.25, 0.8, 0.4, 1);
+        }
+
+        .program-tagline {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 2s cubic-bezier(0.25,0.8,0.4,1), transform 2s cubic-bezier(0.25,0.8,0.4,1);
+        }
+
+        .program-title.visible,
+        .program-tagline.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .gallery-grid {
             position: relative;
             width: 100%;
@@ -528,8 +686,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-body);
-            font-size: var(--fs-tiny);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.55rem;
             color: #bbb;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -553,227 +711,230 @@
             .gallery-card.card-right-bottom { bottom: 0; right: 2%; height: 30%; width: 38%; }
         }
 
-        /* ========== АНКЕТА ========== */
-        .rsvp-box {
+        /* ----- АНКЕТА ГОСТЯ ----- */
+        .rsvp-screen {
             background: #ffffff;
-            padding: var(--space-lg);
+            padding: 60px 20px;
+        }
+
+        .rsvp-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px 30px;
+            box-shadow: none;
             border: 1px solid #eee;
         }
 
-        .form-group {
-            margin-bottom: var(--space-md);
+        .rsvp-title {
+            font-family: 'Lighthaus', 'Quicksand', sans-serif;
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            text-align: center;
+            white-space: nowrap;
         }
+
+        .rsvp-subtitle {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 28px;
+            text-align: center;
+            color: #555;
+            margin-bottom: 35px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
         .form-group label {
             display: block;
-            font-family: var(--font-body);
-            font-size: var(--fs-small);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: var(--space-xs);
-            color: var(--color-dark);
+            margin-bottom: 6px;
+            color: #1a1a1a;
         }
+
         .form-group input {
             width: 100%;
             padding: 10px 0;
             border: none;
             border-bottom: 1px solid #ddd;
-            font-family: var(--font-body);
-            font-size: var(--fs-body);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
             background: transparent;
             outline: none;
-            color: var(--color-dark);
-            transition: border-color 0.3s ease;
+            color: #1a1a1a;
         }
-        .form-group input:focus { border-bottom-color: var(--color-dark); }
-        .form-group input::placeholder { color: #bbb; font-weight: 300; }
+
+        .form-group input:focus {
+            border-bottom-color: #1a1a1a;
+        }
 
         .radio-group {
             display: flex;
-            gap: var(--space-md);
-            margin-top: var(--space-xs);
+            gap: 20px;
+            margin-top: 6px;
             flex-wrap: wrap;
         }
+
         .radio-group label {
             display: flex;
             align-items: center;
             gap: 6px;
             font-weight: 400;
             text-transform: none;
-            font-size: var(--fs-body);
-            color: var(--color-dark);
+            font-size: 14px;
+            color: #1a1a1a;
             margin-bottom: 0;
         }
+
         .radio-group input {
             width: auto;
             margin: 0;
-            accent-color: var(--color-dark);
+            accent-color: #1a1a1a;
+            padding: 0;
         }
 
         .submit-btn {
             display: block;
             width: 100%;
-            padding: 14px;
-            background: var(--color-dark);
-            color: #fff;
+            background: #1a1a1a;
+            color: white;
             border: none;
-            font-family: var(--font-body);
-            font-size: var(--fs-small);
+            padding: 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: background 0.3s ease;
-            margin-top: var(--space-md);
+            margin-top: 25px;
         }
-        .submit-btn:hover { background: #333; }
 
-        .form-message {
+        .submit-btn:hover {
+            background: #333;
+        }
+
+        .hidden-message {
             text-align: center;
-            margin-top: var(--space-md);
-            font-size: var(--fs-body);
-            color: var(--color-dark);
+            margin-top: 20px;
+            font-size: 12px;
+            color: #1a1a1a;
             display: none;
         }
-        .form-message.visible { display: block; }
 
-        /* ========== ФУТЕР ========== */
+        @media (max-width: 480px) {
+            .rsvp-title {
+                font-size: 24px;
+                white-space: normal;
+            }
+            .radio-group {
+                gap: 15px;
+            }
+        }
+
+        /* ----- ФУТЕР ----- */
         .footer {
-            padding: var(--space-lg) var(--space-sm);
+            padding: 30px 20px;
             text-align: center;
             border-top: 1px solid #eee;
             background: #fff;
         }
         .footer-text {
-            font-family: var(--font-body);
-            font-size: var(--fs-small);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
             font-weight: 300;
             color: #aaa;
             letter-spacing: 1.5px;
             text-transform: uppercase;
         }
-
-        /* ========== ОБЩИЕ КЛАССЫ ========== */
-        .text-center { text-align: center; }
-        .text-left { text-align: left; }
-        .mt-xs { margin-top: var(--space-xs); }
-        .mt-sm { margin-top: var(--space-sm); }
-        .mt-md { margin-top: var(--space-md); }
-        .mt-lg { margin-top: var(--space-lg); }
-        .mb-xs { margin-bottom: var(--space-xs); }
-        .mb-sm { margin-bottom: var(--space-sm); }
-        .mb-md { margin-bottom: var(--space-md); }
-        .mb-lg { margin-bottom: var(--space-lg); }
-        .mx-auto { margin-left: auto; margin-right: auto; }
-        .max-w-sm { max-width: 400px; }
-
-        /* ========== АНИМАЦИЯ ПОЯВЛЕНИЯ ДЛЯ RSVP ========== */
-        .rsvp-section {
-            opacity: 1;
-            transform: none;
-            transition: none;
-        }
-        .rsvp-section .fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-        }
-        .rsvp-section .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
 
-<!-- ========== ГЕРОЙ ========== -->
-<section class="hero" id="hero">
-    <div class="hero-bg" id="heroBg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-        <div class="hero-script" id="heroScript">POP-up Event</div>
-        <div class="hero-title" id="heroTitle">KM+ clinic</div>
-        <div class="hero-tagline" id="heroTagline">// new era. new you.</div>
-    </div>
-    <button class="hero-scroll" id="scrollBtn">
-        Листайте вниз
-        <svg viewBox="0 0 10 10"><polyline points="1,3 5,7 9,3" style="fill:none; stroke:black; stroke-width:1.2;"/></svg>
-    </button>
-</section>
-
-<!-- ========== ПРИГЛАШЕНИЕ ========== -->
-<section class="section section-white invitation" id="invitation">
-    <div class="container">
-        <h2 class="title fade-up" id="greetingTitle">Дорогие гости!</h2>
-        <div class="subtitle fade-up" id="saveDate" style="transition-delay: 0.15s;">Save the date!</div>
-        <p class="body-text description fade-up" id="descText" style="transition-delay: 0.3s;">
-            Приглашаем вас на POP-up мероприятие KM+ clinic. Вас ждут выступления экспертов, полезные знания и приятная атмосфера.
-        </p>
-        <div class="divider" id="dividerTop"></div>
-        <div class="date-block">
-            <span class="date-number" id="date1">15</span>
-            <span class="date-dot" id="dot1">.</span>
-            <span class="date-number" id="date2">08</span>
-            <span class="date-dot" id="dot2">.</span>
-            <span class="date-number" id="date3">2026</span>
+<div class="first-screen" id="firstScreen">
+    <div class="photo-bg" id="photoBg"></div>
+    <div class="soft-veil"></div>
+    <div class="content-first">
+        <div class="event-script" id="eventScript">POP-up Event</div>
+        <div class="main-title-block">
+            <div class="main-title-line km-clinic" id="kmClinicName">KM+ clinic</div>
+            <div class="tagline-center" id="taglineSign">// new era. new you.</div>
         </div>
-        <div class="divider" id="dividerBottom"></div>
+        <div class="scroll-down" id="scrollBtn">Листайте вниз<svg class="arrow-icon-svg" viewBox="0 0 10 10"><polyline points="1,3 5,7 9,3" style="fill:none; stroke:black; stroke-width:1.2;"/></svg></div>
     </div>
-</section>
+</div>
 
-<!-- ========== ЛОКАЦИЯ С ФОТО ========== -->
-<section class="location-section" id="location">
+<div class="second-screen" id="secondScreen">
+    <div class="invitation-container">
+        <h2 class="greeting-title" id="greetingTitle">Дорогие гости!</h2>
+        <div class="save-the-date" id="saveTheDate">Save the date!</div>
+        <p class="description-text" id="descriptionText">Приглашаем вас на POP-up мероприятие KM+ clinic. Вас ждут выступления экспертов, полезные знания и приятная атмосфера.</p>
+        <div class="line line-top"></div>
+        <div class="date-block">
+            <span class="date-number from-left-1">15</span><span class="dot">.</span><span class="date-number from-right">08</span><span class="dot">.</span><span class="date-number from-left-2">2026</span>
+        </div>
+        <div class="line line-bottom"></div>
+    </div>
+</div>
+
+<!-- ЛОКАЦИЯ С ФОТО -->
+<div class="location-section" id="locationSection">
     <div class="location-bg"></div>
     <div class="location-content">
-        <h2 class="location-title fade-up">Место проведения</h2>
-        <div class="subtitle fade-up" style="transition-delay: 0.15s;">Save the place!</div>
-        <p class="location-address fade-up" style="transition-delay: 0.3s;">
-            <strong>Konstitucijos pr. 15, Vilnius</strong>
-        </p>
-        <p class="body-text fade-up" style="transition-delay: 0.4s; margin-top: var(--space-xs);">
-            Вильнюс, Литва
-        </p>
-        <div class="text-center fade-up" style="transition-delay: 0.5s; margin-top: var(--space-md);">
-            <a href="https://maps.google.com/?q=Konstitucijos+pr.+15+Vilnius" target="_blank" class="btn">Как добраться</a>
-        </div>
+        <h2 class="location-title" id="locTitle">Место проведения</h2>
+        <div class="save-the-place" id="savePlace">Save the place!</div>
+        <p class="venue-line" id="venueLine"><strong>Konstitucijos pr. 15, Vilnius</strong></p>
+        <p class="venue-line address" id="addressLine">Вильнюс, Литва</p>
+        <a href="https://maps.google.com/?q=Konstitucijos+pr.+15+Vilnius" target="_blank" class="btn-maps" id="mapBtn">Как добраться</a>
     </div>
-</section>
+</div>
 
-<!-- ========== СПИКЕРЫ ========== -->
-<section class="section section-white" id="speakers">
-    <div class="container">
-        <h2 class="title fade-up">Спикеры</h2>
-        <div class="mt-md">
-            <div class="speaker-card fade-up" style="transition-delay: 0.15s;">
-                <div class="speaker-name">Екатерина Могильницкая</div>
-                <div class="speaker-role">Основатель клиники KM+clinic; врач-дерматолог, косметолог, трихолог</div>
-                <div class="speaker-theme">
-                    <strong>Тема:</strong><br>
-                    Особенности ухода за кожей в осенне-зимний период;<br>
-                    Какие новинки косметологии — лишь тренд, а что действительно работает
-                </div>
+<!-- СПИКЕРЫ -->
+<div class="speakers-screen" id="speakersScreen">
+    <div class="speakers-container">
+        <h2 class="speakers-title" id="speakersTitle">Спикеры</h2>
+
+        <div class="speaker-card" id="speaker1">
+            <div class="speaker-name">Екатерина Могильницкая</div>
+            <div class="speaker-role">Основатель клиники KM+clinic; врач-дерматолог, косметолог, трихолог</div>
+            <div class="speaker-theme">
+                <strong>Тема:</strong><br>
+                Особенности ухода за кожей в осенне-зимний период;<br>
+                Какие новинки косметологии — лишь тренд, а что действительно работает
             </div>
-            <div class="speaker-card fade-up" style="transition-delay: 0.3s;">
-                <div class="speaker-name">Анастасия Кургиниан</div>
-                <div class="speaker-role">Холистический подход к здоровью; врач-нутрициолог, энергокоуч</div>
-                <div class="speaker-theme">
-                    <strong>Тема:</strong><br>
-                    Что крадет нашу энергию и здоровье с позиции нутрициологии и психосоматики;<br>
-                    <ul>
-                        <li>— Техника «избавление от мысленной жвачки»;</li>
-                        <li>— Практика на каждый день для гармонизации и «пустой головы».</li>
-                    </ul>
-                </div>
+        </div>
+
+        <div class="speaker-card" id="speaker2">
+            <div class="speaker-name">Анастасия Кургиниан</div>
+            <div class="speaker-role">Холистический подход к здоровью; врач-нутрициолог, энергокоуч</div>
+            <div class="speaker-theme">
+                <strong>Тема:</strong><br>
+                Что крадет нашу энергию и здоровье с позиции нутрициологии и психосоматики;<br>
+                <ul>
+                    <li>— Техника «избавление от мысленной жвачки»;</li>
+                    <li>— Практика на каждый день для гармонизации и «пустой головы».</li>
+                </ul>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- ========== ПРОГРАММА (ГАЛЕРЕЯ) ========== -->
-<section class="section section-light" id="program">
-    <div class="container">
-        <h2 class="title fade-up">Программа</h2>
-        <p class="subtitle fade-up" style="transition-delay: 0.15s;">girls • dj • ice cream • prosecco</p>
+<!-- ПРОГРАММА (ГАЛЕРЕЯ) -->
+<div class="program-screen" id="programScreen">
+    <div class="program-container">
+        <h1 class="program-title" id="programTitle">Программа</h1>
+        <p class="program-tagline" id="programTagline">girls • dj • ice cream • prosecco</p>
 
         <div class="gallery-grid" id="galleryGrid">
             <div class="gallery-card card-center" style="background-image: url('image_2026-08-02_18-40-47.png');"></div>
@@ -784,191 +945,152 @@
             <div class="gallery-card card-placeholder"><span>+ ещё одно фото</span></div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- ========== АНКЕТА ГОСТЯ ========== -->
-<section class="section section-white rsvp-section" id="rsvp">
-    <div class="container">
-        <div class="rsvp-box">
-            <h2 class="title fade-up">Анкета гостя</h2>
-            <div class="subtitle fade-up" style="transition-delay: 0.15s;">Пожалуйста, заполните анкету</div>
-            <form id="guestForm" action="https://formspree.io/f/mkodbodq" method="POST" class="mt-md">
-                <div class="form-group fade-up" style="transition-delay: 0.3s;">
-                    <label>Ваше имя и фамилия</label>
-                    <input type="text" name="Имя и фамилия" id="guestName" placeholder="Иванова Анна" required>
+<!-- АНКЕТА ГОСТЯ -->
+<div class="rsvp-screen" id="rsvpScreen">
+    <div class="rsvp-container">
+        <h2 class="rsvp-title">Анкета гостя</h2>
+        <div class="rsvp-subtitle">Пожалуйста, заполните анкету</div>
+        <form id="guestForm" action="https://formspree.io/f/mkodbodq" method="POST">
+            <div class="form-group">
+                <label>Ваше имя и фамилия</label>
+                <input type="text" name="Имя и фамилия" id="guestName" placeholder="Иванова Анна" required>
+            </div>
+            <div class="form-group">
+                <label>Планируете присутствовать?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="Присутствие" value="Да, с радостью!" required> Да, с радостью!</label>
+                    <label><input type="radio" name="Присутствие" value="Нет, к сожалению"> К сожалению, нет</label>
                 </div>
-                <div class="form-group fade-up" style="transition-delay: 0.4s;">
-                    <label>Планируете присутствовать?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="Присутствие" value="Да, с радостью!" required> Да, с радостью!</label>
-                        <label><input type="radio" name="Присутствие" value="Нет, к сожалению"> К сожалению, нет</label>
-                    </div>
-                </div>
-                <div class="form-group fade-up" style="transition-delay: 0.5s;">
-                    <label>Ваш номер телефона</label>
-                    <input type="tel" name="Номер телефона" id="guestPhone" placeholder="+7 999 999-99-99" required>
-                </div>
-                <button type="submit" class="submit-btn fade-up" style="transition-delay: 0.6s;">Отправить ответ</button>
-                <div id="formMessage" class="form-message">Спасибо! Ждём вас на мероприятии</div>
-            </form>
-        </div>
+            </div>
+            <div class="form-group">
+                <label>Ваш номер телефона</label>
+                <input type="tel" name="Номер телефона" id="guestPhone" placeholder="+7 999 999-99-99" required>
+            </div>
+            <button type="submit" class="submit-btn">Отправить ответ</button>
+            <div id="formMessage" class="hidden-message">Спасибо! Ждём вас на мероприятии</div>
+        </form>
     </div>
-</section>
+</div>
 
-<!-- ========== ФУТЕР ========== -->
+<!-- ФУТЕР -->
 <footer class="footer">
-    <div class="container">
+    <div class="container" style="max-width: 500px; margin: 0 auto; padding: 0 1rem;">
         <p class="footer-text">KM+ clinic // new era. new you.</p>
     </div>
 </footer>
 
 <script>
     (function() {
-        'use strict';
+        // ПЕРВЫЙ ЭКРАН
+        const firstObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => document.getElementById('photoBg')?.classList.add('visible'), 100);
+                    setTimeout(() => document.getElementById('eventScript')?.classList.add('visible'), 600);
+                    setTimeout(() => document.getElementById('kmClinicName')?.classList.add('visible'), 1100);
+                    setTimeout(() => document.getElementById('taglineSign')?.classList.add('visible'), 1450);
+                    firstObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.1 });
+        firstObserver.observe(document.getElementById('firstScreen'));
 
-        // ===== ФУНКЦИЯ ДЛЯ ОТСЛЕЖИВАНИЯ ЭЛЕМЕНТОВ =====
-        function observeElement(el, className, threshold = 0.2, delay = 0) {
-            if (!el) return;
-            const observer = new IntersectionObserver((entries) => {
+        // ПРИГЛАШЕНИЕ
+        const secondContainer = document.querySelector('.invitation-container');
+        if (secondContainer) {
+            new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            el.classList.add(className);
-                        }, delay);
+                        setTimeout(() => document.getElementById('greetingTitle')?.classList.add('visible'), 100);
+                        setTimeout(() => document.getElementById('saveTheDate')?.classList.add('visible'), 300);
+                        setTimeout(() => document.getElementById('descriptionText')?.classList.add('visible'), 500);
+                        setTimeout(() => document.querySelector('.line-top')?.classList.add('visible'), 700);
+                        setTimeout(() => document.querySelectorAll('.date-number').forEach(el => el.classList.add('visible')), 1000);
+                        setTimeout(() => document.querySelectorAll('.dot').forEach(el => el.classList.add('visible')), 1300);
+                        setTimeout(() => document.querySelector('.line-bottom')?.classList.add('visible'), 1600);
                         observer.disconnect();
                     }
                 });
-            }, { threshold });
-            observer.observe(el);
+            }, { threshold: 0.2 }).observe(secondContainer);
         }
 
-        // ===== ГЕРОЙ =====
-        const heroBg = document.getElementById('heroBg');
-        const heroScript = document.getElementById('heroScript');
-        const heroTitle = document.getElementById('heroTitle');
-        const heroTagline = document.getElementById('heroTagline');
-
-        if (heroBg) {
-            setTimeout(() => heroBg.classList.add('visible'), 100);
-        }
-        if (heroScript) {
-            setTimeout(() => heroScript.classList.add('visible'), 600);
-        }
-        if (heroTitle) {
-            setTimeout(() => heroTitle.classList.add('visible'), 1100);
-        }
-        if (heroTagline) {
-            setTimeout(() => heroTagline.classList.add('visible'), 1450);
-        }
-
-        // ===== ПРИГЛАШЕНИЕ =====
-        const invitation = document.getElementById('invitation');
-        if (invitation) {
-            const obs = new IntersectionObserver((entries) => {
+        // ЛОКАЦИЯ
+        const locSec = document.getElementById('locationSection');
+        if (locSec) {
+            new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        invitation.querySelectorAll('.fade-up').forEach((el, i) => {
-                            setTimeout(() => el.classList.add('visible'), i * 120);
-                        });
-                        setTimeout(() => {
-                            document.getElementById('dividerTop')?.classList.add('visible');
-                        }, 500);
-                        setTimeout(() => {
-                            document.querySelectorAll('.date-number').forEach(el => el.classList.add('visible'));
-                        }, 800);
-                        setTimeout(() => {
-                            document.querySelectorAll('.date-dot').forEach(el => el.classList.add('visible'));
-                        }, 1100);
-                        setTimeout(() => {
-                            document.getElementById('dividerBottom')?.classList.add('visible');
-                        }, 1400);
-                        obs.disconnect();
+                        setTimeout(() => document.getElementById('locTitle')?.classList.add('visible'), 200);
+                        setTimeout(() => document.getElementById('savePlace')?.classList.add('visible'), 400);
+                        setTimeout(() => document.getElementById('venueLine')?.classList.add('visible'), 600);
+                        setTimeout(() => document.getElementById('addressLine')?.classList.add('visible'), 800);
+                        setTimeout(() => document.getElementById('mapBtn')?.classList.add('visible'), 1000);
+                        observer.disconnect();
                     }
                 });
-            }, { threshold: 0.2 });
-            obs.observe(invitation);
+            }, { threshold: 0.3 }).observe(locSec);
         }
 
-        // ===== ЛОКАЦИЯ =====
-        const location = document.getElementById('location');
-        if (location) {
-            const obs = new IntersectionObserver((entries) => {
+        // СПИКЕРЫ
+        const speakersScreen = document.getElementById('speakersScreen');
+        if (speakersScreen) {
+            const spObs = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        location.querySelectorAll('.fade-up').forEach((el, i) => {
-                            setTimeout(() => el.classList.add('visible'), i * 120);
-                        });
-                        obs.disconnect();
+                        document.getElementById('speakersTitle')?.classList.add('visible');
+                        setTimeout(() => document.getElementById('speaker1')?.classList.add('visible'), 300);
+                        setTimeout(() => document.getElementById('speaker2')?.classList.add('visible'), 600);
+                        spObs.disconnect();
                     }
                 });
-            }, { threshold: 0.2 });
-            obs.observe(location);
+            }, { threshold: 0.3 });
+            spObs.observe(speakersScreen);
         }
 
-        // ===== СПИКЕРЫ =====
-        const speakers = document.getElementById('speakers');
-        if (speakers) {
-            const obs = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        speakers.querySelectorAll('.fade-up').forEach((el, i) => {
-                            setTimeout(() => el.classList.add('visible'), i * 120);
-                        });
-                        obs.disconnect();
-                    }
-                });
-            }, { threshold: 0.2 });
-            obs.observe(speakers);
-        }
-
-        // ===== ПРОГРАММА (ГАЛЕРЕЯ) =====
-        const program = document.getElementById('program');
+        // ПРОГРАММА
+        const programScreen = document.getElementById('programScreen');
         const galleryCards = document.querySelectorAll('.gallery-card');
-
-        if (program) {
-            const obs = new IntersectionObserver((entries) => {
+        if (programScreen) {
+            const pObs = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        program.querySelectorAll('.fade-up').forEach((el, i) => {
-                            setTimeout(() => el.classList.add('visible'), i * 120);
-                        });
-
+                        document.getElementById('programTitle')?.classList.add('visible');
+                        document.getElementById('programTagline')?.classList.add('visible');
                         const delays = [0, 300, 600, 150, 450, 750];
                         galleryCards.forEach((card, i) => {
                             setTimeout(() => {
                                 card.classList.add('visible');
                             }, delays[i] + 400);
                         });
+                        pObs.disconnect();
+                    }
+                });
+            }, { threshold: 0.3 });
+            pObs.observe(programScreen);
+        }
 
-                        obs.disconnect();
+        // АНКЕТА ГОСТЯ
+        const rsvpScreen = document.getElementById('rsvpScreen');
+        if (rsvpScreen) {
+            const rsvpObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        rsvpScreen.classList.add('visible');
+                        rsvpObserver.disconnect();
                     }
                 });
             }, { threshold: 0.2 });
-            obs.observe(program);
+            rsvpObserver.observe(rsvpScreen);
         }
 
-        // ===== АНКЕТА ГОСТЯ (только текст анимируется) =====
-        const rsvp = document.getElementById('rsvp');
-        if (rsvp) {
-            const obs = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        rsvp.querySelectorAll('.fade-up').forEach((el, i) => {
-                            setTimeout(() => el.classList.add('visible'), i * 120);
-                        });
-                        obs.disconnect();
-                    }
-                });
-            }, { threshold: 0.15 });
-            obs.observe(rsvp);
-        }
-
-        // ===== КНОПКА СКРОЛЛА =====
+        // КНОПКА СКРОЛЛА
         document.getElementById('scrollBtn')?.addEventListener('click', () => {
-            document.getElementById('invitation')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('secondScreen')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
-        // ===== ФОРМА =====
+        // ФОРМА
         const form = document.getElementById('guestForm');
         const messageDiv = document.getElementById('formMessage');
 
@@ -991,18 +1113,12 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        if (messageDiv) {
-                            messageDiv.style.display = 'block';
-                            messageDiv.classList.add('visible');
-                        }
+                        messageDiv.style.display = 'block';
                         form.reset();
                         const radios = form.querySelectorAll('input[type="radio"]');
                         radios.forEach(r => r.checked = false);
                         setTimeout(() => {
-                            if (messageDiv) {
-                                messageDiv.style.display = 'none';
-                                messageDiv.classList.remove('visible');
-                            }
+                            messageDiv.style.display = 'none';
                         }, 4000);
                     } else {
                         alert('Произошла ошибка. Пожалуйста, попробуйте еще раз.');
@@ -1014,18 +1130,17 @@
             });
         }
 
-        // ===== ОБРАБОТКА SUCCESS В URL =====
         if (window.location.search.includes('success=true') || window.location.search.includes('success')) {
+            const form = document.getElementById('guestForm');
             if (form) {
                 form.reset();
                 const radios = form.querySelectorAll('input[type="radio"]');
                 radios.forEach(r => r.checked = false);
+                const messageDiv = document.getElementById('formMessage');
                 if (messageDiv) {
                     messageDiv.style.display = 'block';
-                    messageDiv.classList.add('visible');
                     setTimeout(() => {
                         messageDiv.style.display = 'none';
-                        messageDiv.classList.remove('visible');
                     }, 4000);
                 }
                 if (window.history && window.history.replaceState) {
