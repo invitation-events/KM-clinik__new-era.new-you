@@ -579,7 +579,7 @@
             }
         }
 
-        /* ----- ПРОГРАММА (ГАЛЕРЕЯ) ----- */
+        /* ----- ПРОГРАММА (ГАЛЕРЕЯ - БОЛЬШИЕ ОТСТУПЫ МЕЖДУ ФОТО) ----- */
         .program-screen {
             background: #fff;
             padding: 35px 16px 45px;
@@ -645,52 +645,52 @@
             transform: scale(1);
         }
 
-        /* ЦЕНТРАЛЬНОЕ ФОТО — ОПУЩЕНО НИЖЕ */
+        /* ЦЕНТРАЛЬНОЕ ФОТО */
         .gallery-card.card-center {
-            width: 68%;
-            height: 70%;
-            left: 16%;
-            top: 10%;
+            width: 60%;
+            height: 62%;
+            left: 20%;
+            top: 12%;
             z-index: 10;
         }
 
-        /* ВЕРХНИЕ ФОТО */
+        /* ВЕРХНИЕ ФОТО — БОЛЬШЕ ОТСТУП ОТ ЦЕНТРАЛЬНОГО */
         .gallery-card.card-left-top {
-            width: 48%;
-            height: 48%;
-            left: 1%;
-            top: 4%;
+            width: 40%;
+            height: 40%;
+            left: 2%;
+            top: 2%;
             z-index: 4;
         }
         .gallery-card.card-right-top {
-            width: 48%;
-            height: 48%;
-            right: 1%;
-            top: 4%;
+            width: 40%;
+            height: 40%;
+            right: 2%;
+            top: 2%;
             z-index: 2;
         }
 
-        /* НИЖНИЕ ФОТО — ОПУЩЕНЫ НИЖЕ */
+        /* НИЖНИЕ ФОТО — БОЛЬШЕ ОТСТУП ОТ ЦЕНТРАЛЬНОГО */
         .gallery-card.card-left-bottom {
-            width: 52%;
-            height: 48%;
-            left: 1%;
-            bottom: -2%;
+            width: 44%;
+            height: 40%;
+            left: 2%;
+            bottom: 2%;
             z-index: 5;
         }
         .gallery-card.card-right-bottom {
-            width: 52%;
-            height: 48%;
-            right: 1%;
-            bottom: -2%;
+            width: 44%;
+            height: 40%;
+            right: 2%;
+            bottom: 2%;
             z-index: 3;
         }
 
         .gallery-card.card-placeholder {
-            width: 28%;
-            height: 26%;
-            right: 36%;
-            bottom: 2%;
+            width: 24%;
+            height: 22%;
+            right: 38%;
+            bottom: 4%;
             z-index: 1;
             background: #f8f8f8;
             border: 2px dashed #d0d0d0;
@@ -698,7 +698,7 @@
             align-items: center;
             justify-content: center;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             color: #bbb;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -706,20 +706,20 @@
 
         @media (max-width: 580px) {
             .gallery-grid { aspect-ratio: 1 / 1.1; max-height: 480px; }
-            .gallery-card.card-center { width: 62%; height: 62%; left: 19%; top: 12%; }
-            .gallery-card.card-left-top { width: 44%; height: 42%; top: 4%; left: 1%; }
-            .gallery-card.card-right-top { width: 44%; height: 42%; top: 4%; right: 1%; }
-            .gallery-card.card-left-bottom { width: 48%; height: 44%; bottom: 0%; left: 1%; }
-            .gallery-card.card-right-bottom { width: 48%; height: 44%; bottom: 0%; right: 1%; }
+            .gallery-card.card-center { width: 54%; height: 54%; left: 23%; top: 14%; }
+            .gallery-card.card-left-top { width: 36%; height: 36%; top: 2%; left: 2%; }
+            .gallery-card.card-right-top { width: 36%; height: 36%; top: 2%; right: 2%; }
+            .gallery-card.card-left-bottom { width: 40%; height: 38%; bottom: 2%; left: 2%; }
+            .gallery-card.card-right-bottom { width: 40%; height: 38%; bottom: 2%; right: 2%; }
             .gallery-card.card-placeholder { display: none; }
         }
         @media (max-width: 420px) {
             .gallery-grid { aspect-ratio: 1 / 1.1; max-height: 400px; }
-            .gallery-card.card-center { width: 56%; height: 56%; left: 22%; top: 14%; }
-            .gallery-card.card-left-top { width: 38%; height: 36%; top: 4%; left: 1%; }
-            .gallery-card.card-right-top { width: 38%; height: 36%; top: 4%; right: 1%; }
-            .gallery-card.card-left-bottom { width: 42%; height: 38%; bottom: 0%; left: 1%; }
-            .gallery-card.card-right-bottom { width: 42%; height: 38%; bottom: 0%; right: 1%; }
+            .gallery-card.card-center { width: 48%; height: 48%; left: 26%; top: 16%; }
+            .gallery-card.card-left-top { width: 32%; height: 32%; top: 2%; left: 2%; }
+            .gallery-card.card-right-top { width: 32%; height: 32%; top: 2%; right: 2%; }
+            .gallery-card.card-left-bottom { width: 36%; height: 34%; bottom: 2%; left: 2%; }
+            .gallery-card.card-right-bottom { width: 36%; height: 34%; bottom: 2%; right: 2%; }
         }
 
         /* ----- АНКЕТА ГОСТЯ ----- */
