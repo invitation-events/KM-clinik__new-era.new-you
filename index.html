@@ -240,6 +240,23 @@
             margin: 0 auto;
         }
 
+        .greeting-title {
+            font-family: 'Lighthaus', 'Quicksand', sans-serif;
+            font-weight: 400;
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            letter-spacing: 4px;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .greeting-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .save-the-date {
             font-family: 'Pinyon Script', cursive;
             font-size: clamp(2rem, 4.5vw, 2.4rem);
@@ -321,6 +338,7 @@
             transition: opacity 2s ease;
         }
 
+        .greeting-title.visible,
         .save-the-date.visible,
         .description-text.visible {
             opacity: 1;
@@ -341,7 +359,7 @@
             opacity: 1;
         }
 
-        /* ----- ЛОКАЦИЯ (без фото) ----- */
+        /* ----- ЛОКАЦИЯ ----- */
         .location-section {
             max-width: 450px;
             margin: 0 auto;
@@ -362,7 +380,7 @@
             font-size: clamp(1.8rem, 4vw, 2.2rem);
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             opacity: 0;
             transform: translateX(-60px);
             transition: opacity 2s cubic-bezier(0.2,0.9,0.3,1.1), transform 2s cubic-bezier(0.2,0.9,0.3,1.1);
@@ -379,29 +397,26 @@
             transition: opacity 2s cubic-bezier(0.2,0.9,0.3,1.1), transform 2s cubic-bezier(0.2,0.9,0.3,1.1);
         }
 
-        .venue-name {
+        .venue-line {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            line-height: 1.4;
-            max-width: 260px;
-            margin: 0 auto 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 6px;
             opacity: 0;
             transform: translateY(55px);
             transition: opacity 2.8s cubic-bezier(0.16,1,0.3,1.1), transform 2.8s cubic-bezier(0.16,1,0.3,1.1);
         }
 
-        .venue-address {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.95rem;
+        .venue-line strong {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .venue-line.address {
             font-weight: 300;
             color: #555;
             margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(55px);
-            transition: opacity 2.8s cubic-bezier(0.16,1,0.3,1.1), transform 2.8s cubic-bezier(0.16,1,0.3,1.1);
         }
 
         .btn-maps {
@@ -426,8 +441,8 @@
 
         .location-section.visible .location-title { opacity: 1; transform: translateX(0); }
         .location-section.visible .save-the-place { opacity: 1; transform: skewX(-3deg) translateX(0); }
-        .location-section.visible .venue-name { opacity: 1; transform: translateY(0); }
-        .location-section.visible .venue-address { opacity: 1; transform: translateY(0); }
+        .location-section.visible .venue-line { opacity: 1; transform: translateY(0); }
+        .location-section.visible .venue-line.address { opacity: 1; transform: translateY(0); }
         .location-section.visible .btn-maps { opacity: 1; transform: translateY(0); }
 
         /* ----- СПИКЕРЫ ----- */
@@ -526,7 +541,7 @@
             }
         }
 
-        /* ----- ПРОГРАММА (вместо Вдохновения) ----- */
+        /* ----- ПРОГРАММА (с фото) ----- */
         .program-screen {
             background: #fff;
             padding: 40px 16px 60px;
@@ -546,18 +561,16 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             color: #121212;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 2s cubic-bezier(0.25, 0.8, 0.4, 1), transform 2s cubic-bezier(0.25, 0.8, 0.4, 1);
         }
 
         .program-tagline {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 300;
-            color: #555;
-            letter-spacing: 1px;
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2rem;
+            color: #1a1a1a;
             margin-bottom: 25px;
             opacity: 0;
             transform: translateY(40px);
@@ -622,6 +635,24 @@
         .program-item.icecream { background: #e8eee8; }
         .program-item.prosecco { background: #f0e6d8; }
         .program-item.vibes { background: #f0f0f0; }
+
+        @media (max-width: 480px) {
+            .program-grid {
+                gap: 10px;
+            }
+            .program-item {
+                padding: 12px 8px;
+            }
+            .program-item .icon-text {
+                font-size: 1.4rem;
+            }
+            .program-item .label {
+                font-size: 0.45rem;
+            }
+            .program-tagline {
+                font-size: 1.5rem;
+            }
+        }
 
         /* ----- АНКЕТА ГОСТЯ ----- */
         .rsvp-screen {
@@ -761,18 +792,6 @@
             .radio-group {
                 gap: 15px;
             }
-            .program-grid {
-                gap: 10px;
-            }
-            .program-item {
-                padding: 12px 8px;
-            }
-            .program-item .icon-text {
-                font-size: 1.4rem;
-            }
-            .program-item .label {
-                font-size: 0.45rem;
-            }
         }
     </style>
 </head>
@@ -793,6 +812,8 @@
 
 <div class="second-screen" id="secondScreen">
     <div class="invitation-container">
+        <!-- ЗАГОЛОВОК "ДОРОГИЕ ГОСТИ!" -->
+        <h2 class="greeting-title" id="greetingTitle">Дорогие гости!</h2>
         <div class="save-the-date" id="saveTheDate">Save the date!</div>
         <p class="description-text" id="descriptionText">Приглашаем вас на POP-up мероприятие KM+ clinic. Вас ждут выступления экспертов, полезные знания и приятная атмосфера.</p>
         <div class="line line-top"></div>
@@ -805,10 +826,10 @@
 
 <!-- ЛОКАЦИЯ (без фонового фото) -->
 <div class="location-section" id="locationSection">
-    <h2 class="location-title">МЕСТО<br>ПРОВЕДЕНИЯ</h2>
+    <h2 class="location-title">Место проведения</h2>
     <div class="save-the-place">Save the place!</div>
-    <p class="venue-name">Konstitucios pr. 15, Vilnius</p>
-    <p class="venue-address">Вильнюс, Литва</p>
+    <p class="venue-line"><strong>Konstitucios pr. 15, Vilnius</strong></p>
+    <p class="venue-line address">Вильнюс, Литва</p>
     <a href="https://maps.google.com/?q=Konstitucijos+pr.+15+Vilnius" target="_blank" class="btn-maps">Как добраться</a>
 </div>
 
@@ -842,11 +863,11 @@
     </div>
 </div>
 
-<!-- ПРОГРАММА -->
+<!-- ПРОГРАММА (с фото) -->
 <div class="program-screen" id="programScreen">
     <div class="program-container">
         <h1 class="program-title" id="programTitle">Программа</h1>
-        <p class="program-tagline" id="programTagline">girls • experts • dj • ice cream • prosecco</p>
+        <p class="program-tagline" id="programTagline">girls • dj • ice cream • prosecco</p>
 
         <div class="program-grid">
             <div class="program-item girls" id="prog1"><span class="icon-text">Girls</span><span class="label">Элегантность</span></div>
@@ -908,12 +929,13 @@
             new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => document.getElementById('saveTheDate')?.classList.add('visible'), 200);
-                        setTimeout(() => document.getElementById('descriptionText')?.classList.add('visible'), 400);
-                        setTimeout(() => document.querySelector('.line-top')?.classList.add('visible'), 600);
-                        setTimeout(() => document.querySelectorAll('.date-number').forEach(el => el.classList.add('visible')), 900);
-                        setTimeout(() => document.querySelectorAll('.dot').forEach(el => el.classList.add('visible')), 1200);
-                        setTimeout(() => document.querySelector('.line-bottom')?.classList.add('visible'), 1500);
+                        setTimeout(() => document.getElementById('greetingTitle')?.classList.add('visible'), 100);
+                        setTimeout(() => document.getElementById('saveTheDate')?.classList.add('visible'), 300);
+                        setTimeout(() => document.getElementById('descriptionText')?.classList.add('visible'), 500);
+                        setTimeout(() => document.querySelector('.line-top')?.classList.add('visible'), 700);
+                        setTimeout(() => document.querySelectorAll('.date-number').forEach(el => el.classList.add('visible')), 1000);
+                        setTimeout(() => document.querySelectorAll('.dot').forEach(el => el.classList.add('visible')), 1300);
+                        setTimeout(() => document.querySelector('.line-bottom')?.classList.add('visible'), 1600);
                         observer.disconnect();
                     }
                 });
