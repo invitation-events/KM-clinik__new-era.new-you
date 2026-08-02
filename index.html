@@ -359,7 +359,7 @@
             opacity: 1;
         }
 
-        /* ----- ЛОКАЦИЯ С ФОТО ----- */
+        /* ----- ЛОКАЦИЯ С ФОТО (ОРИГИНАЛ, БЕЗ ЗАТЕМНЕНИЯ И Ч/Б) ----- */
         .location-section {
             position: relative;
             padding: 50px 25px;
@@ -376,9 +376,8 @@
             background-image: url('image_2026-08-02_20-33-58.png');
             background-size: cover;
             background-position: center;
-            opacity: 0.15;
+            opacity: 1;
             z-index: 0;
-            filter: grayscale(100%) brightness(0.9);
         }
 
         .location-content {
@@ -388,9 +387,8 @@
             max-width: 450px;
             margin: 0 auto;
             text-align: center;
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.88);
             padding: 40px 25px;
-            backdrop-filter: blur(2px);
         }
 
         .location-title {
@@ -622,7 +620,7 @@
             width: 100%;
             aspect-ratio: 1 / 1.15;
             max-height: 560px;
-            margin: var(--space-md) auto 0;
+            margin: 20px auto 0;
         }
 
         .gallery-card {
@@ -738,8 +736,9 @@
         }
 
         .rsvp-subtitle {
-            font-family: 'Pinyon Script', cursive;
-            font-size: 28px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
             text-align: center;
             color: #555;
             margin-bottom: 35px;
@@ -747,10 +746,27 @@
             padding-bottom: 15px;
             display: inline-block;
             width: 100%;
+            letter-spacing: 0.5px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.2,0.9,0.3,1.1), transform 0.8s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .rsvp-subtitle.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .form-group {
             margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.2,0.9,0.3,1.1), transform 0.6s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .form-group.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .form-group label {
@@ -819,6 +835,14 @@
             text-transform: uppercase;
             cursor: pointer;
             margin-top: 25px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.2,0.9,0.3,1.1), transform 0.6s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+
+        .submit-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .submit-btn:hover {
@@ -858,6 +882,11 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
         }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
     </style>
 </head>
 <body>
@@ -888,7 +917,7 @@
     </div>
 </div>
 
-<!-- ЛОКАЦИЯ С ФОТО -->
+<!-- ЛОКАЦИЯ С ФОТО (ОРИГИНАЛ) -->
 <div class="location-section" id="locationSection">
     <div class="location-bg"></div>
     <div class="location-content">
@@ -951,24 +980,24 @@
 <div class="rsvp-screen" id="rsvpScreen">
     <div class="rsvp-container">
         <h2 class="rsvp-title">Анкета гостя</h2>
-        <div class="rsvp-subtitle">Пожалуйста, заполните анкету</div>
+        <div class="rsvp-subtitle" id="rsvpSubtitle">Пожалуйста, заполните анкету</div>
         <form id="guestForm" action="https://formspree.io/f/mkodbodq" method="POST">
-            <div class="form-group">
+            <div class="form-group" id="fg1">
                 <label>Ваше имя и фамилия</label>
                 <input type="text" name="Имя и фамилия" id="guestName" placeholder="Иванова Анна" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="fg2">
                 <label>Планируете присутствовать?</label>
                 <div class="radio-group">
                     <label><input type="radio" name="Присутствие" value="Да, с радостью!" required> Да, с радостью!</label>
                     <label><input type="radio" name="Присутствие" value="Нет, к сожалению"> К сожалению, нет</label>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="fg3">
                 <label>Ваш номер телефона</label>
                 <input type="tel" name="Номер телефона" id="guestPhone" placeholder="+7 999 999-99-99" required>
             </div>
-            <button type="submit" class="submit-btn">Отправить ответ</button>
+            <button type="submit" class="submit-btn" id="submitBtn">Отправить ответ</button>
             <div id="formMessage" class="hidden-message">Спасибо! Ждём вас на мероприятии</div>
         </form>
     </div>
@@ -976,7 +1005,7 @@
 
 <!-- ФУТЕР -->
 <footer class="footer">
-    <div class="container" style="max-width: 500px; margin: 0 auto; padding: 0 1rem;">
+    <div class="container">
         <p class="footer-text">KM+ clinic // new era. new you.</p>
     </div>
 </footer>
@@ -1049,7 +1078,7 @@
             spObs.observe(speakersScreen);
         }
 
-        // ПРОГРАММА
+        // ПРОГРАММА — появление карточек поочередно только при видимости
         const programScreen = document.getElementById('programScreen');
         const galleryCards = document.querySelectorAll('.gallery-card');
         if (programScreen) {
@@ -1058,6 +1087,8 @@
                     if (entry.isIntersecting) {
                         document.getElementById('programTitle')?.classList.add('visible');
                         document.getElementById('programTagline')?.classList.add('visible');
+                        
+                        // Поочередное появление с задержками
                         const delays = [0, 300, 600, 150, 450, 750];
                         galleryCards.forEach((card, i) => {
                             setTimeout(() => {
@@ -1071,13 +1102,27 @@
             pObs.observe(programScreen);
         }
 
-        // АНКЕТА ГОСТЯ
+        // АНКЕТА ГОСТЯ — плавная анимация текста
         const rsvpScreen = document.getElementById('rsvpScreen');
         if (rsvpScreen) {
             const rsvpObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        rsvpScreen.classList.add('visible');
+                        // Подзаголовок
+                        setTimeout(() => {
+                            document.getElementById('rsvpSubtitle')?.classList.add('visible');
+                        }, 200);
+                        // Поля формы по очереди
+                        const fields = ['fg1', 'fg2', 'fg3'];
+                        fields.forEach((id, i) => {
+                            setTimeout(() => {
+                                document.getElementById(id)?.classList.add('visible');
+                            }, 400 + i * 200);
+                        });
+                        // Кнопка
+                        setTimeout(() => {
+                            document.getElementById('submitBtn')?.classList.add('visible');
+                        }, 1000);
                         rsvpObserver.disconnect();
                     }
                 });
