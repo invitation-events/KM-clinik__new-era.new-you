@@ -477,7 +477,7 @@
             background: #333;
         }
 
-        /* ----- СПИКЕРЫ (ТЕМЫ ПО ЦЕНТРУ) ----- */
+        /* ----- СПИКЕРЫ ----- */
         .speakers-screen {
             background: #fff;
             padding: 35px 20px 45px;
@@ -579,7 +579,7 @@
             }
         }
 
-        /* ----- ПРОГРАММА (ГАЛЕРЕЯ) ----- */
+        /* ----- ПРОГРАММА (ГАЛЕРЕЯ - ОРИГИНАЛЬНЫЙ РАЗМЕР ФОТО) ----- */
         .program-screen {
             background: #fff;
             padding: 35px 16px 45px;
@@ -625,15 +625,16 @@
             position: relative;
             width: 100%;
             aspect-ratio: 1 / 1.15;
-            max-height: 540px;
+            max-height: 560px;
             margin: 15px auto 0;
         }
 
         .gallery-card {
             position: absolute;
-            background-size: cover;
+            background-size: contain;
+            background-repeat: no-repeat;
             background-position: center;
-            background-color: #f4f4f4;
+            background-color: transparent;
             box-shadow: 0 8px 24px rgba(0,0,0,0.08);
             opacity: 0;
             transform: scale(0.94);
@@ -645,38 +646,38 @@
         }
 
         .gallery-card.card-center {
-            width: 44%;
-            height: 58%;
-            left: 28%;
-            top: 6%;
+            width: 46%;
+            height: 60%;
+            left: 27%;
+            top: 4%;
             z-index: 10;
         }
         .gallery-card.card-left-top {
-            width: 30%;
-            height: 34%;
-            left: 4%;
-            top: 8%;
+            width: 32%;
+            height: 36%;
+            left: 3%;
+            top: 6%;
             z-index: 4;
         }
         .gallery-card.card-right-top {
-            width: 30%;
-            height: 34%;
-            right: 2%;
-            top: 2%;
+            width: 32%;
+            height: 36%;
+            right: 1%;
+            top: 0;
             z-index: 2;
         }
         .gallery-card.card-left-bottom {
-            width: 36%;
-            height: 38%;
-            left: 6%;
-            bottom: 4%;
+            width: 38%;
+            height: 40%;
+            left: 5%;
+            bottom: 2%;
             z-index: 5;
         }
         .gallery-card.card-right-bottom {
-            width: 36%;
-            height: 38%;
-            right: 4%;
-            bottom: 2%;
+            width: 38%;
+            height: 40%;
+            right: 3%;
+            bottom: 0;
             z-index: 3;
         }
         .gallery-card.card-placeholder {
@@ -699,16 +700,16 @@
 
         @media (max-width: 580px) {
             .gallery-grid { aspect-ratio: 1 / 1.2; max-height: 440px; }
-            .gallery-card.card-center { width: 38%; height: 48%; left: 31%; top: 18%; }
-            .gallery-card.card-left-top { top: 2%; left: 2%; height: 32%; }
-            .gallery-card.card-right-top { top: 0; right: 2%; height: 32%; }
-            .gallery-card.card-left-bottom { bottom: 2%; left: 4%; height: 34%; }
-            .gallery-card.card-right-bottom { bottom: 0; right: 4%; height: 34%; }
+            .gallery-card.card-center { width: 40%; height: 50%; left: 30%; top: 16%; }
+            .gallery-card.card-left-top { top: 0; left: 0; height: 32%; width: 34%; }
+            .gallery-card.card-right-top { top: 0; right: 0; height: 32%; width: 34%; }
+            .gallery-card.card-left-bottom { bottom: 0; left: 2%; height: 34%; width: 40%; }
+            .gallery-card.card-right-bottom { bottom: 0; right: 2%; height: 34%; width: 38%; }
             .gallery-card.card-placeholder { display: none; }
         }
         @media (max-width: 420px) {
             .gallery-grid { aspect-ratio: 1 / 1.2; max-height: 360px; }
-            .gallery-card.card-center { width: 40%; height: 42%; left: 30%; top: 18%; }
+            .gallery-card.card-center { width: 42%; height: 44%; left: 29%; top: 18%; }
             .gallery-card.card-left-top { top: 0; left: 0; height: 28%; width: 34%; }
             .gallery-card.card-right-top { top: 0; right: 0; height: 28%; width: 34%; }
             .gallery-card.card-left-bottom { bottom: 0; left: 2%; height: 30%; width: 40%; }
@@ -945,8 +946,8 @@
             <div class="speaker-role">Основатель клиники KM+clinic; врач-дерматолог, косметолог, трихолог</div>
             <div class="speaker-theme">
                 <strong>Theme:</strong>
-                Особенности ухода за кожей в осенне-зимний период<br>
-                Какие новинки косметологии — лишь тренд, а что действительно работает
+                Особенности ухода за кожей в осенне-зимний период;<br>
+                Какие новинки косметологии — лишь тренд, а что действительно работает.
             </div>
         </div>
 
@@ -955,10 +956,10 @@
             <div class="speaker-role">Холистический подход к здоровью; врач-нутрициолог, энергокоуч</div>
             <div class="speaker-theme">
                 <strong>Theme:</strong>
-                Что крадет нашу энергию и здоровье с позиции нутрициологии и психосоматики<br>
+                Что крадет нашу энергию и здоровье с позиции нутрициологии и психосоматики;<br>
                 <ul>
-                    <li>— Техника «избавление от мысленной жвачки»</li>
-                    <li>— Практика на каждый день для гармонизации и «пустой головы»</li>
+                    <li>— Техника «избавление от мысленной жвачки»;</li>
+                    <li>— Практика на каждый день для гармонизации и «пустой головы».</li>
                 </ul>
             </div>
         </div>
