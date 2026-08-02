@@ -56,11 +56,13 @@
             background-color: #0a0a0a;
         }
 
-        /* ----- ПЕРВЫЙ ЭКРАН ----- */
+        /* ----- ПЕРВЫЙ ЭКРАН (100vh на всех устройствах) ----- */
         .first-screen {
             position: relative;
             width: 100%;
             height: 100vh;
+            min-height: 100vh;
+            max-height: 100vh;
             overflow: hidden;
             background-color: #0a0a0a;
         }
@@ -579,7 +581,7 @@
             }
         }
 
-        /* ----- ПРОГРАММА (ГАЛЕРЕЯ - БОЛЬШИЕ ОТСТУПЫ МЕЖДУ ФОТО) ----- */
+        /* ----- ПРОГРАММА (ГАЛЕРЕЯ) ----- */
         .program-screen {
             background: #fff;
             padding: 35px 16px 45px;
@@ -645,7 +647,6 @@
             transform: scale(1);
         }
 
-        /* ЦЕНТРАЛЬНОЕ ФОТО */
         .gallery-card.card-center {
             width: 60%;
             height: 62%;
@@ -653,8 +654,6 @@
             top: 12%;
             z-index: 10;
         }
-
-        /* ВЕРХНИЕ ФОТО — БОЛЬШЕ ОТСТУП ОТ ЦЕНТРАЛЬНОГО */
         .gallery-card.card-left-top {
             width: 40%;
             height: 40%;
@@ -669,8 +668,6 @@
             top: 2%;
             z-index: 2;
         }
-
-        /* НИЖНИЕ ФОТО — БОЛЬШЕ ОТСТУП ОТ ЦЕНТРАЛЬНОГО */
         .gallery-card.card-left-bottom {
             width: 44%;
             height: 40%;
@@ -685,7 +682,6 @@
             bottom: 2%;
             z-index: 3;
         }
-
         .gallery-card.card-placeholder {
             width: 24%;
             height: 22%;
