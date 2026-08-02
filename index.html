@@ -579,7 +579,7 @@
             }
         }
 
-        /* ----- ПРОГРАММА (ГАЛЕРЕЯ - БЕЗ РАМОК, ФОТО УВЕЛИЧЕНЫ, БОЛЬШЕ ОТСТУПЫ) ----- */
+        /* ----- ПРОГРАММА (ГАЛЕРЕЯ - ФОТО ПО ЦЕНТРУ, НИЖНИЕ ОПУЩЕНЫ) ----- */
         .program-screen {
             background: #fff;
             padding: 35px 16px 45px;
@@ -645,42 +645,42 @@
             transform: scale(1);
         }
 
-        /* ВЕРХНИЕ ФОТО — ВЫШЕ */
+        /* ВСЕ ФОТО ПО ЦЕНТРУ */
         .gallery-card.card-center {
             width: 70%;
             height: 72%;
             left: 15%;
-            top: 0%;
+            top: 4%;
             z-index: 10;
         }
         .gallery-card.card-left-top {
             width: 50%;
             height: 50%;
             left: 0%;
-            top: -2%;
+            top: 2%;
             z-index: 4;
         }
         .gallery-card.card-right-top {
             width: 50%;
             height: 50%;
             right: 0%;
-            top: -2%;
+            top: 2%;
             z-index: 2;
         }
 
-        /* НИЖНИЕ ФОТО — НИЖЕ */
+        /* НИЖНИЕ ФОТО — ОПУЩЕНЫ НИЖЕ НА 15px (используем % для адаптивности) */
         .gallery-card.card-left-bottom {
             width: 55%;
             height: 52%;
             left: -2%;
-            bottom: -2%;
+            bottom: -4%;
             z-index: 5;
         }
         .gallery-card.card-right-bottom {
             width: 55%;
             height: 52%;
             right: -2%;
-            bottom: -2%;
+            bottom: -4%;
             z-index: 3;
         }
         .gallery-card.card-placeholder {
@@ -703,20 +703,20 @@
 
         @media (max-width: 580px) {
             .gallery-grid { aspect-ratio: 1 / 1.1; max-height: 480px; }
-            .gallery-card.card-center { width: 65%; height: 65%; left: 17.5%; top: 2%; }
-            .gallery-card.card-left-top { width: 45%; height: 44%; top: 0%; left: 0%; }
-            .gallery-card.card-right-top { width: 45%; height: 44%; top: 0%; right: 0%; }
-            .gallery-card.card-left-bottom { width: 50%; height: 46%; bottom: 0%; left: 0%; }
-            .gallery-card.card-right-bottom { width: 50%; height: 46%; bottom: 0%; right: 0%; }
+            .gallery-card.card-center { width: 65%; height: 65%; left: 17.5%; top: 6%; }
+            .gallery-card.card-left-top { width: 45%; height: 44%; top: 2%; left: 0%; }
+            .gallery-card.card-right-top { width: 45%; height: 44%; top: 2%; right: 0%; }
+            .gallery-card.card-left-bottom { width: 50%; height: 46%; bottom: -2%; left: 0%; }
+            .gallery-card.card-right-bottom { width: 50%; height: 46%; bottom: -2%; right: 0%; }
             .gallery-card.card-placeholder { display: none; }
         }
         @media (max-width: 420px) {
             .gallery-grid { aspect-ratio: 1 / 1.1; max-height: 400px; }
-            .gallery-card.card-center { width: 60%; height: 58%; left: 20%; top: 4%; }
-            .gallery-card.card-left-top { width: 40%; height: 38%; top: 0%; left: 0%; }
-            .gallery-card.card-right-top { width: 40%; height: 38%; top: 0%; right: 0%; }
-            .gallery-card.card-left-bottom { width: 44%; height: 40%; bottom: 0%; left: 0%; }
-            .gallery-card.card-right-bottom { width: 44%; height: 40%; bottom: 0%; right: 0%; }
+            .gallery-card.card-center { width: 60%; height: 58%; left: 20%; top: 6%; }
+            .gallery-card.card-left-top { width: 40%; height: 38%; top: 2%; left: 0%; }
+            .gallery-card.card-right-top { width: 40%; height: 38%; top: 2%; right: 0%; }
+            .gallery-card.card-left-bottom { width: 44%; height: 40%; bottom: -2%; left: 0%; }
+            .gallery-card.card-right-bottom { width: 44%; height: 40%; bottom: -2%; right: 0%; }
         }
 
         /* ----- АНКЕТА ГОСТЯ ----- */
@@ -969,7 +969,7 @@
     </div>
 </div>
 
-<!-- ПРОГРАММА (ГАЛЕРЕЯ - БЕЗ РАМОК, ФОТО УВЕЛИЧЕНЫ, БОЛЬШЕ ОТСТУПЫ) -->
+<!-- ПРОГРАММА (ГАЛЕРЕЯ) -->
 <div class="program-screen" id="programScreen">
     <div class="program-container">
         <h1 class="program-title" id="programTitle">Программа</h1>
