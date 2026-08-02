@@ -579,7 +579,7 @@
             }
         }
 
-        /* ----- ПРОГРАММА (ГАЛЕРЕЯ - ОРИГИНАЛЬНЫЙ РАЗМЕР ФОТО) ----- */
+        /* ----- ПРОГРАММА (ГАЛЕРЕЯ - БЕЗ РАМОК, ФОТО УВЕЛИЧЕНЫ) ----- */
         .program-screen {
             background: #fff;
             padding: 35px 16px 45px;
@@ -624,8 +624,8 @@
         .gallery-grid {
             position: relative;
             width: 100%;
-            aspect-ratio: 1 / 1.15;
-            max-height: 560px;
+            aspect-ratio: 1 / 1.1;
+            max-height: 600px;
             margin: 15px auto 0;
         }
 
@@ -635,10 +635,10 @@
             background-repeat: no-repeat;
             background-position: center;
             background-color: transparent;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
             opacity: 0;
             transform: scale(0.94);
             transition: opacity 1.4s cubic-bezier(0.25, 0.8, 0.4, 1), transform 1.4s cubic-bezier(0.25, 0.8, 0.4, 1);
+            box-shadow: none;
         }
         .gallery-card.visible {
             opacity: 1;
@@ -646,45 +646,45 @@
         }
 
         .gallery-card.card-center {
-            width: 46%;
-            height: 60%;
-            left: 27%;
-            top: 4%;
+            width: 70%;
+            height: 80%;
+            left: 15%;
+            top: 2%;
             z-index: 10;
         }
         .gallery-card.card-left-top {
-            width: 32%;
-            height: 36%;
-            left: 3%;
-            top: 6%;
+            width: 50%;
+            height: 55%;
+            left: 0;
+            top: 0;
             z-index: 4;
         }
         .gallery-card.card-right-top {
-            width: 32%;
-            height: 36%;
-            right: 1%;
+            width: 50%;
+            height: 55%;
+            right: 0;
             top: 0;
             z-index: 2;
         }
         .gallery-card.card-left-bottom {
-            width: 38%;
-            height: 40%;
-            left: 5%;
-            bottom: 2%;
+            width: 55%;
+            height: 58%;
+            left: 0;
+            bottom: 0;
             z-index: 5;
         }
         .gallery-card.card-right-bottom {
-            width: 38%;
-            height: 40%;
-            right: 3%;
+            width: 55%;
+            height: 58%;
+            right: 0;
             bottom: 0;
             z-index: 3;
         }
         .gallery-card.card-placeholder {
-            width: 26%;
-            height: 28%;
-            right: 38%;
-            bottom: 4%;
+            width: 30%;
+            height: 32%;
+            right: 35%;
+            bottom: 2%;
             z-index: 1;
             background: #f8f8f8;
             border: 2px dashed #d0d0d0;
@@ -699,21 +699,21 @@
         }
 
         @media (max-width: 580px) {
-            .gallery-grid { aspect-ratio: 1 / 1.2; max-height: 440px; }
-            .gallery-card.card-center { width: 40%; height: 50%; left: 30%; top: 16%; }
-            .gallery-card.card-left-top { top: 0; left: 0; height: 32%; width: 34%; }
-            .gallery-card.card-right-top { top: 0; right: 0; height: 32%; width: 34%; }
-            .gallery-card.card-left-bottom { bottom: 0; left: 2%; height: 34%; width: 40%; }
-            .gallery-card.card-right-bottom { bottom: 0; right: 2%; height: 34%; width: 38%; }
+            .gallery-grid { aspect-ratio: 1 / 1.1; max-height: 480px; }
+            .gallery-card.card-center { width: 65%; height: 72%; left: 17.5%; top: 4%; }
+            .gallery-card.card-left-top { width: 45%; height: 48%; top: 0; left: 0; }
+            .gallery-card.card-right-top { width: 45%; height: 48%; top: 0; right: 0; }
+            .gallery-card.card-left-bottom { width: 50%; height: 50%; bottom: 0; left: 0; }
+            .gallery-card.card-right-bottom { width: 50%; height: 50%; bottom: 0; right: 0; }
             .gallery-card.card-placeholder { display: none; }
         }
         @media (max-width: 420px) {
-            .gallery-grid { aspect-ratio: 1 / 1.2; max-height: 360px; }
-            .gallery-card.card-center { width: 42%; height: 44%; left: 29%; top: 18%; }
-            .gallery-card.card-left-top { top: 0; left: 0; height: 28%; width: 34%; }
-            .gallery-card.card-right-top { top: 0; right: 0; height: 28%; width: 34%; }
-            .gallery-card.card-left-bottom { bottom: 0; left: 2%; height: 30%; width: 40%; }
-            .gallery-card.card-right-bottom { bottom: 0; right: 2%; height: 30%; width: 38%; }
+            .gallery-grid { aspect-ratio: 1 / 1.1; max-height: 400px; }
+            .gallery-card.card-center { width: 60%; height: 65%; left: 20%; top: 6%; }
+            .gallery-card.card-left-top { width: 40%; height: 42%; top: 0; left: 0; }
+            .gallery-card.card-right-top { width: 40%; height: 42%; top: 0; right: 0; }
+            .gallery-card.card-left-bottom { width: 44%; height: 44%; bottom: 0; left: 0; }
+            .gallery-card.card-right-bottom { width: 44%; height: 44%; bottom: 0; right: 0; }
         }
 
         /* ----- АНКЕТА ГОСТЯ ----- */
@@ -966,7 +966,7 @@
     </div>
 </div>
 
-<!-- ПРОГРАММА (ГАЛЕРЕЯ) -->
+<!-- ПРОГРАММА (ГАЛЕРЕЯ - БЕЗ РАМОК, ФОТО УВЕЛИЧЕНЫ) -->
 <div class="program-screen" id="programScreen">
     <div class="program-container">
         <h1 class="program-title" id="programTitle">Программа</h1>
