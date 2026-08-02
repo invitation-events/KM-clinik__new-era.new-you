@@ -8,7 +8,7 @@
     <!-- Open Graph / Для превью в соцсетях и мессенджерах -->
     <meta property="og:title" content="KM+ clinic | POP-up Event" />
     <meta property="og:description" content="Приглашаем вас на POP-up мероприятие KM+ clinic. Вильнюс, 15 августа 2026. Вас ждут выступления экспертов, полезные знания и приятная атмосфера." />
-    <meta property="og:image" content="https://invitation-events.github.io/KM-clinik-new-era.new-you.---15.08.2026/image_2026-08-02_18-58-02.png" />
+    <meta property="og:image" content="https://invitation-events.github.io/KM-clinik-new-era.new-you.---15.08.2026/image_2026-08-02_20-19-25.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="800" />
     <meta property="og:url" content="https://invitation-events.github.io/KM-clinik-new-era.new-you.---15.08.2026/" />
@@ -19,7 +19,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="KM+ clinic | POP-up Event" />
     <meta name="twitter:description" content="Приглашаем вас на POP-up мероприятие KM+ clinic. Вильнюс, 15 августа 2026." />
-    <meta name="twitter:image" content="https://invitation-events.github.io/KM-clinik-new-era.new-you.---15.08.2026/image_2026-08-02_18-58-02.png" />
+    <meta name="twitter:image" content="https://invitation-events.github.io/KM-clinik-new-era.new-you.---15.08.2026/image_2026-08-02_20-19-25.png" />
 
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@100;200;300;400;500;700;800&family=Parisienne&family=Pinyon+Script&display=swap" rel="stylesheet">
 
@@ -541,7 +541,7 @@
             }
         }
 
-        /* ----- ПРОГРАММА (с фото) ----- */
+        /* ----- ПРОГРАММА (5 ФОТО + МЕСТО ДЛЯ ШЕСТОГО) ----- */
         .program-screen {
             background: #fff;
             padding: 40px 16px 60px;
@@ -583,75 +583,106 @@
             transform: translateY(0);
         }
 
+        /* СЕТКА ДЛЯ ФОТО КАК В ПРИМЕРЕ ДРЕСС-КОДА */
         .program-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 10px;
+            position: relative;
+            width: 100%;
+            height: 520px;
+            margin-bottom: 30px;
         }
 
-        .program-item {
-            background: #f5f5f5;
-            padding: 20px 10px;
-            aspect-ratio: 1 / 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #1a1a1a;
-            gap: 4px;
+        .program-card {
+            position: absolute;
+            background-size: cover;
+            background-position: center;
+            background-color: #f4f4f4;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            border-radius: 0px;
             opacity: 0;
-            transform: scale(0.92);
-            transition: opacity 0.8s cubic-bezier(0.2,0.9,0.3,1.1), transform 0.8s cubic-bezier(0.2,0.9,0.3,1.1);
+            transform: scale(0.96);
+            transition: opacity 1.2s cubic-bezier(0.25, 0.8, 0.4, 1), transform 1.2s cubic-bezier(0.25, 0.8, 0.4, 1);
         }
 
-        .program-item.visible {
+        .program-card.visible-card {
             opacity: 1;
             transform: scale(1);
         }
 
-        .program-item .icon-text {
-            font-size: 1.8rem;
-            font-family: 'Lighthaus', 'Quicksand', sans-serif;
-            font-weight: 300;
+        /* Расположение */
+        .program-grid .card-center {
+            width: 44%;
+            height: 300px;
+            left: 28%;
+            top: 20px;
+            z-index: 10;
+        }
+        .program-grid .card-right-top {
+            width: 30%;
+            height: 180px;
+            right: 0;
+            top: 0;
+            z-index: 4;
+        }
+        .program-grid .card-left-top {
+            width: 32%;
+            height: 200px;
+            left: 4%;
+            top: 50px;
+            z-index: 2;
+        }
+        .program-grid .card-right-bottom {
+            width: 36%;
+            height: 200px;
+            right: 4%;
+            top: 230px;
+            z-index: 3;
+        }
+        .program-grid .card-left-bottom {
+            width: 38%;
+            height: 210px;
+            left: 6%;
+            top: 260px;
+            z-index: 5;
+        }
+        .program-grid .card-placeholder {
+            width: 28%;
+            height: 150px;
+            right: 38%;
+            bottom: 10px;
+            z-index: 1;
+            background: #f8f8f8;
+            border: 2px dashed #d0d0d0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            color: #bbb;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
-
-        .program-item .label {
-            font-size: 0.55rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: #666;
+        .program-grid .card-placeholder.visible-card {
+            opacity: 1;
+            transform: scale(1);
         }
 
-        .program-item.girls { background: #f5e8ec; }
-        .program-item.experts { background: #dde4e8; }
-        .program-item.dj { background: #e8e0d8; }
-        .program-item.icecream { background: #e8eee8; }
-        .program-item.prosecco { background: #f0e6d8; }
-        .program-item.vibes { background: #f0f0f0; }
-
+        @media (max-width: 580px) {
+            .program-grid { height: 460px; }
+            .program-grid .card-center { width: 38%; height: 220px; left: 31%; top: 80px; }
+            .program-grid .card-left-top { top: 0; left: 2%; height: 160px; }
+            .program-grid .card-right-top { top: 0; right: 2%; height: 160px; }
+            .program-grid .card-left-bottom { bottom: -10px; top: auto; left: 4%; height: 170px; }
+            .program-grid .card-right-bottom { bottom: 0; right: 4%; top: auto; height: 170px; }
+            .program-grid .card-placeholder { display: none; }
+        }
         @media (max-width: 480px) {
-            .program-grid {
-                gap: 10px;
-            }
-            .program-item {
-                padding: 12px 8px;
-            }
-            .program-item .icon-text {
-                font-size: 1.4rem;
-            }
-            .program-item .label {
-                font-size: 0.45rem;
-            }
-            .program-tagline {
-                font-size: 1.5rem;
-            }
+            .program-grid { height: 400px; }
+            .program-grid .card-center { width: 40%; height: 180px; left: 30%; top: 70px; }
+            .program-grid .card-left-top { top: -5px; left: 0; height: 130px; width: 34%; }
+            .program-grid .card-right-top { top: -5px; right: 0; height: 130px; width: 34%; }
+            .program-grid .card-left-bottom { bottom: -20px; top: auto; left: 2%; height: 140px; width: 40%; }
+            .program-grid .card-right-bottom { bottom: -15px; right: 2%; top: auto; height: 140px; width: 38%; }
+            .program-grid .card-placeholder { display: none; }
         }
 
         /* ----- АНКЕТА ГОСТЯ ----- */
@@ -812,7 +843,6 @@
 
 <div class="second-screen" id="secondScreen">
     <div class="invitation-container">
-        <!-- ЗАГОЛОВОК "ДОРОГИЕ ГОСТИ!" -->
         <h2 class="greeting-title" id="greetingTitle">Дорогие гости!</h2>
         <div class="save-the-date" id="saveTheDate">Save the date!</div>
         <p class="description-text" id="descriptionText">Приглашаем вас на POP-up мероприятие KM+ clinic. Вас ждут выступления экспертов, полезные знания и приятная атмосфера.</p>
@@ -824,7 +854,7 @@
     </div>
 </div>
 
-<!-- ЛОКАЦИЯ (без фонового фото) -->
+<!-- ЛОКАЦИЯ -->
 <div class="location-section" id="locationSection">
     <h2 class="location-title">Место проведения</h2>
     <div class="save-the-place">Save the place!</div>
@@ -863,19 +893,23 @@
     </div>
 </div>
 
-<!-- ПРОГРАММА (с фото) -->
+<!-- ПРОГРАММА (5 ФОТО + МЕСТО ДЛЯ ШЕСТОГО) -->
 <div class="program-screen" id="programScreen">
     <div class="program-container">
         <h1 class="program-title" id="programTitle">Программа</h1>
         <p class="program-tagline" id="programTagline">girls • dj • ice cream • prosecco</p>
 
         <div class="program-grid">
-            <div class="program-item girls" id="prog1"><span class="icon-text">Girls</span><span class="label">Элегантность</span></div>
-            <div class="program-item experts" id="prog2"><span class="icon-text">Experts</span><span class="label">Эксперты</span></div>
-            <div class="program-item dj" id="prog3"><span class="icon-text">DJ</span><span class="label">Музыка</span></div>
-            <div class="program-item icecream" id="prog4"><span class="icon-text">Ice Cream</span><span class="label">Десерт</span></div>
-            <div class="program-item prosecco" id="prog5"><span class="icon-text">Prosecco</span><span class="label">Напиток</span></div>
-            <div class="program-item vibes" id="prog6"><span class="icon-text">Vibes</span><span class="label">Атмосфера</span></div>
+            <!-- 5 ФОТО (появляются в хаотичном порядке) -->
+            <div class="program-card card-center" style="background-image: url('image_2026-08-02_18-40-47.png');" data-delay="0"></div>
+            <div class="program-card card-left-top" style="background-image: url('image_2026-08-02_18-50-28.png');" data-delay="300"></div>
+            <div class="program-card card-right-top" style="background-image: url('image_2026-08-02_18-54-32.png');" data-delay="600"></div>
+            <div class="program-card card-left-bottom" style="background-image: url('image_2026-08-02_18-58-02.png');" data-delay="150"></div>
+            <div class="program-card card-right-bottom" style="background-image: url('image_2026-08-02_20-19-25.png');" data-delay="450"></div>
+            <!-- МЕСТО ДЛЯ ШЕСТОГО ФОТО -->
+            <div class="program-card card-placeholder" data-delay="750">
+                <span>+ ещё одно фото</span>
+            </div>
         </div>
     </div>
 </div>
@@ -962,7 +996,7 @@
             spObs.observe(speakersScreen);
         }
 
-        // ПРОГРАММА
+        // ПРОГРАММА (появление в хаотичном порядке)
         const programScreen = document.getElementById('programScreen');
         if (programScreen) {
             const pObs = new IntersectionObserver((entries) => {
@@ -970,9 +1004,17 @@
                     if (entry.isIntersecting) {
                         document.getElementById('programTitle')?.classList.add('visible');
                         document.getElementById('programTagline')?.classList.add('visible');
-                        document.querySelectorAll('.program-item').forEach((el, i) => {
-                            setTimeout(() => el.classList.add('visible'), 300 + i * 120);
+                        
+                        // Собираем все карточки и перемешиваем порядок появления
+                        const cards = document.querySelectorAll('.program-card');
+                        const delays = [0, 300, 600, 150, 450, 750];
+                        
+                        cards.forEach((el, i) => {
+                            setTimeout(() => {
+                                el.classList.add('visible-card');
+                            }, delays[i]);
                         });
+                        
                         pObs.disconnect();
                     }
                 });
