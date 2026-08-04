@@ -323,6 +323,7 @@
             align-items: baseline;
             gap: 5px;
             flex-wrap: wrap;
+            margin-bottom: 0; /* убрали отступ, теперь управляем через gathering-time */
         }
 
         .date-number {
@@ -352,7 +353,7 @@
             transition: opacity 2s ease;
         }
 
-        /* время сбора — рядом с датой */
+        /* ВРЕМЯ СБОРА — увеличенный отступ сверху */
         .gathering-time {
             font-family: 'Montserrat', sans-serif;
             font-size: clamp(0.8rem, 1.8vw, 1rem);
@@ -362,7 +363,7 @@
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
-            margin-top: 8px;
+            margin-top: 24px; /* увеличенный отступ */
             display: block;
             width: 100%;
         }
@@ -960,7 +961,7 @@
         <div class="date-block">
             <span class="date-number from-left-1">15</span><span class="dot">.</span><span class="date-number from-right">08</span><span class="dot">.</span><span class="date-number from-left-2">2026</span>
         </div>
-        <!-- ВРЕМЯ СБОРА ГОСТЕЙ РЯДОМ С ДАТОЙ -->
+        <!-- ВРЕМЯ СБОРА ГОСТЕЙ С УВЕЛИЧЕННЫМ ОТСТУПОМ -->
         <div class="gathering-time" id="gatheringTime"><span>Сбор гостей в 13:00</span></div>
         <div class="line line-bottom"></div>
     </div>
@@ -1087,7 +1088,7 @@
                         setTimeout(() => document.querySelector('.line-top')?.classList.add('visible'), 700);
                         setTimeout(() => document.querySelectorAll('.date-number').forEach(el => el.classList.add('visible')), 1000);
                         setTimeout(() => document.querySelectorAll('.dot').forEach(el => el.classList.add('visible')), 1300);
-                        // появление времени сбора
+                        // появление времени сбора (отдельно)
                         setTimeout(() => document.getElementById('gatheringTime')?.classList.add('visible'), 1500);
                         setTimeout(() => document.querySelector('.line-bottom')?.classList.add('visible'), 1800);
                         observer.disconnect();
