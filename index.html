@@ -70,7 +70,6 @@
             background-color: #0a0a0a;
         }
 
-        /* Fallback для старых браузеров */
         @supports not (height: 100dvh) {
             .first-screen {
                 height: 100vh;
@@ -399,7 +398,7 @@
             opacity: 1;
         }
 
-        /* ----- ЛОКАЦИЯ С ФОТО (ОРИГИНАЛ) ----- */
+        /* ----- ЛОКАЦИЯ С ФОТО ----- */
         .location-section {
             position: relative;
             padding: 40px 25px;
@@ -896,14 +895,6 @@
             background: #333;
         }
 
-        .hidden-message {
-            text-align: center;
-            margin-top: 16px;
-            font-size: 12px;
-            color: #1a1a1a;
-            display: none;
-        }
-
         @media (max-width: 480px) {
             .rsvp-title {
                 font-size: 22px;
@@ -935,7 +926,7 @@
             padding: 0 1rem;
         }
 
-        /* ----- ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ ОБ УСПЕХЕ ----- */
+        /* ----- ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ С ИСЧЕЗАЮЩЕЙ ЛИНИЕЙ ----- */
         .toast-notification {
             position: fixed;
             bottom: 30px;
@@ -943,7 +934,7 @@
             transform: translateX(-50%) translateY(120px);
             background: #1a1a1a;
             color: #fff;
-            padding: 22px 32px;
+            padding: 22px 32px 18px;
             border-radius: 4px;
             font-family: 'Montserrat', sans-serif;
             font-size: 14px;
@@ -970,29 +961,48 @@
             font-weight: 600;
             letter-spacing: 1px;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
-        .toast-notification .toast-timer {
-            display: block;
+        .toast-notification .toast-sub {
             font-size: 12px;
             font-weight: 300;
             color: #aaa;
-            margin-top: 6px;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
-        .toast-notification .toast-timer span {
-            font-weight: 600;
-            color: #fff;
+        /* Исчезающая линия-индикатор */
+        .toast-timer-bar {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.15);
+            margin-top: 14px;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .toast-timer-bar .timer-fill {
+            height: 100%;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2px;
+            transition: width 5s linear;
+        }
+
+        .toast-timer-bar .timer-fill.shrink {
+            width: 0%;
         }
 
         @media (max-width: 480px) {
             .toast-notification {
-                padding: 16px 20px;
+                padding: 16px 20px 14px;
                 font-size: 12px;
                 min-width: 200px;
                 bottom: 20px;
+            }
+            .toast-timer-bar {
+                margin-top: 10px;
             }
         }
     </style>
@@ -1026,7 +1036,7 @@
     </div>
 </div>
 
-<!-- ЛОКАЦИЯ С ФОТО (ОРИГИНАЛ) -->
+<!-- ЛОКАЦИЯ С ФОТО -->
 <div class="location-section" id="locationSection">
     <div class="location-bg"></div>
     <div class="location-content">
@@ -1118,10 +1128,13 @@
     </div>
 </footer>
 
-<!-- ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ -->
+<!-- ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ С ЛИНИЕЙ -->
 <div class="toast-notification" id="toastNotification">
     <span class="toast-title">✓ Анкета отправлена</span>
-    <span class="toast-timer">Окно закроется через <span id="timerCount">5</span> сек</span>
+    <span class="toast-sub">Спасибо! Ждём вас на мероприятии</span>
+    <div class="toast-timer-bar">
+        <div class="timer-fill" id="timerFill"></div>
+    </div>
 </div>
 
 <script>
@@ -1246,10 +1259,25 @@
             document.getElementById('secondScreen')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
-        // ФОРМА + ТОСТ
+        // ФОРМА + ТОСТ С ЛИНИЕЙ
         const form = document.getElementById('guestForm');
         const toast = document.getElementById('toastNotification');
-        const timerSpan = document.getElementById('timerCount');
+        const timerFill = document.getElementById('timerFill');
+
+        function showToast() {
+            toast.classList.add('show');
+            // Сбрасываем и запускаем анимацию
+            timerFill.classList.remove('shrink');
+            // Небольшая задержка для перезапуска анимации
+            void timerFill.offsetWidth;
+            timerFill.classList.add('shrink');
+
+            // Через 5 секунд скрываем тост
+            setTimeout(() => {
+                toast.classList.remove('show');
+                timerFill.classList.remove('shrink');
+            }, 5000);
+        }
 
         if (form) {
             form.addEventListener('submit', function(e) {
@@ -1270,23 +1298,7 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        // Показываем тост
-                        toast.classList.add('show');
-                        let seconds = 5;
-                        timerSpan.textContent = seconds;
-
-                        const interval = setInterval(() => {
-                            seconds--;
-                            if (seconds > 0) {
-                                timerSpan.textContent = seconds;
-                            } else {
-                                clearInterval(interval);
-                                toast.classList.remove('show');
-                                timerSpan.textContent = '5';
-                            }
-                        }, 1000);
-
-                        // Сброс формы
+                        showToast();
                         form.reset();
                         const radios = form.querySelectorAll('input[type="radio"]');
                         radios.forEach(r => r.checked = false);
@@ -1300,28 +1312,14 @@
             });
         }
 
-        // Если на страницу пришли с success=true (на случай, если форма отправилась нативно)
+        // Если на страницу пришли с success=true
         if (window.location.search.includes('success=true') || window.location.search.includes('success')) {
             const form = document.getElementById('guestForm');
             if (form) {
                 form.reset();
                 const radios = form.querySelectorAll('input[type="radio"]');
                 radios.forEach(r => r.checked = false);
-                // Показываем тост
-                toast.classList.add('show');
-                let seconds = 5;
-                timerSpan.textContent = seconds;
-
-                const interval = setInterval(() => {
-                    seconds--;
-                    if (seconds > 0) {
-                        timerSpan.textContent = seconds;
-                    } else {
-                        clearInterval(interval);
-                        toast.classList.remove('show');
-                        timerSpan.textContent = '5';
-                    }
-                }, 1000);
+                showToast();
             }
             if (window.history && window.history.replaceState) {
                 window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
