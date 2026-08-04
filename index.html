@@ -323,7 +323,7 @@
             align-items: baseline;
             gap: 5px;
             flex-wrap: wrap;
-            margin-bottom: 0; /* убрали отступ, теперь управляем через gathering-time */
+            margin-bottom: 0;
         }
 
         .date-number {
@@ -353,7 +353,6 @@
             transition: opacity 2s ease;
         }
 
-        /* ВРЕМЯ СБОРА — увеличенный отступ сверху */
         .gathering-time {
             font-family: 'Montserrat', sans-serif;
             font-size: clamp(0.8rem, 1.8vw, 1rem);
@@ -363,7 +362,7 @@
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
-            margin-top: 24px; /* увеличенный отступ */
+            margin-top: 24px;
             display: block;
             width: 100%;
         }
@@ -935,6 +934,67 @@
             margin: 0 auto;
             padding: 0 1rem;
         }
+
+        /* ----- ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ ОБ УСПЕХЕ ----- */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background: #1a1a1a;
+            color: #fff;
+            padding: 22px 32px;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            z-index: 1000;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            min-width: 280px;
+            max-width: 90%;
+            pointer-events: none;
+            border-left: 3px solid #fff;
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .toast-notification .toast-title {
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .toast-notification .toast-timer {
+            display: block;
+            font-size: 12px;
+            font-weight: 300;
+            color: #aaa;
+            margin-top: 6px;
+            letter-spacing: 2px;
+        }
+
+        .toast-notification .toast-timer span {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        @media (max-width: 480px) {
+            .toast-notification {
+                padding: 16px 20px;
+                font-size: 12px;
+                min-width: 200px;
+                bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -961,7 +1021,6 @@
         <div class="date-block">
             <span class="date-number from-left-1">15</span><span class="dot">.</span><span class="date-number from-right">08</span><span class="dot">.</span><span class="date-number from-left-2">2026</span>
         </div>
-        <!-- ВРЕМЯ СБОРА ГОСТЕЙ С УВЕЛИЧЕННЫМ ОТСТУПОМ -->
         <div class="gathering-time" id="gatheringTime"><span>Сбор гостей в 13:00</span></div>
         <div class="line line-bottom"></div>
     </div>
@@ -1031,7 +1090,7 @@
     <div class="rsvp-container">
         <h2 class="rsvp-title">Анкета гостя</h2>
         <div class="rsvp-subtitle" id="rsvpSubtitle">Пожалуйста, заполните анкету</div>
-        <form id="guestForm" action="https://formspree.io/f/mkodbodq" method="POST">
+        <form id="guestForm" action="https://formspree.io/f/mgawwroz" method="POST">
             <div class="form-group" id="fg1">
                 <label>Ваше имя и фамилия</label>
                 <input type="text" name="Имя и фамилия" id="guestName" placeholder="Иванова Анна" required>
@@ -1048,7 +1107,6 @@
                 <input type="tel" name="Номер телефона" id="guestPhone" placeholder="+7 999 999-99-99" required>
             </div>
             <button type="submit" class="submit-btn" id="submitBtn">Отправить ответ</button>
-            <div id="formMessage" class="hidden-message">Спасибо! Ждём вас на мероприятии</div>
         </form>
     </div>
 </div>
@@ -1059,6 +1117,12 @@
         <p class="footer-text">KM+ clinic // new era. new you.</p>
     </div>
 </footer>
+
+<!-- ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ -->
+<div class="toast-notification" id="toastNotification">
+    <span class="toast-title">✓ Анкета отправлена</span>
+    <span class="toast-timer">Окно закроется через <span id="timerCount">5</span> сек</span>
+</div>
 
 <script>
     (function() {
@@ -1088,7 +1152,6 @@
                         setTimeout(() => document.querySelector('.line-top')?.classList.add('visible'), 700);
                         setTimeout(() => document.querySelectorAll('.date-number').forEach(el => el.classList.add('visible')), 1000);
                         setTimeout(() => document.querySelectorAll('.dot').forEach(el => el.classList.add('visible')), 1300);
-                        // появление времени сбора (отдельно)
                         setTimeout(() => document.getElementById('gatheringTime')?.classList.add('visible'), 1500);
                         setTimeout(() => document.querySelector('.line-bottom')?.classList.add('visible'), 1800);
                         observer.disconnect();
@@ -1183,9 +1246,10 @@
             document.getElementById('secondScreen')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
-        // ФОРМА
+        // ФОРМА + ТОСТ
         const form = document.getElementById('guestForm');
-        const messageDiv = document.getElementById('formMessage');
+        const toast = document.getElementById('toastNotification');
+        const timerSpan = document.getElementById('timerCount');
 
         if (form) {
             form.addEventListener('submit', function(e) {
@@ -1206,13 +1270,26 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        messageDiv.style.display = 'block';
+                        // Показываем тост
+                        toast.classList.add('show');
+                        let seconds = 5;
+                        timerSpan.textContent = seconds;
+
+                        const interval = setInterval(() => {
+                            seconds--;
+                            if (seconds > 0) {
+                                timerSpan.textContent = seconds;
+                            } else {
+                                clearInterval(interval);
+                                toast.classList.remove('show');
+                                timerSpan.textContent = '5';
+                            }
+                        }, 1000);
+
+                        // Сброс формы
                         form.reset();
                         const radios = form.querySelectorAll('input[type="radio"]');
                         radios.forEach(r => r.checked = false);
-                        setTimeout(() => {
-                            messageDiv.style.display = 'none';
-                        }, 4000);
                     } else {
                         alert('Произошла ошибка. Пожалуйста, попробуйте еще раз.');
                     }
@@ -1223,22 +1300,31 @@
             });
         }
 
+        // Если на страницу пришли с success=true (на случай, если форма отправилась нативно)
         if (window.location.search.includes('success=true') || window.location.search.includes('success')) {
             const form = document.getElementById('guestForm');
             if (form) {
                 form.reset();
                 const radios = form.querySelectorAll('input[type="radio"]');
                 radios.forEach(r => r.checked = false);
-                const messageDiv = document.getElementById('formMessage');
-                if (messageDiv) {
-                    messageDiv.style.display = 'block';
-                    setTimeout(() => {
-                        messageDiv.style.display = 'none';
-                    }, 4000);
-                }
-                if (window.history && window.history.replaceState) {
-                    window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
-                }
+                // Показываем тост
+                toast.classList.add('show');
+                let seconds = 5;
+                timerSpan.textContent = seconds;
+
+                const interval = setInterval(() => {
+                    seconds--;
+                    if (seconds > 0) {
+                        timerSpan.textContent = seconds;
+                    } else {
+                        clearInterval(interval);
+                        toast.classList.remove('show');
+                        timerSpan.textContent = '5';
+                    }
+                }, 1000);
+            }
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
             }
         }
     })();
