@@ -352,6 +352,32 @@
             transition: opacity 2s ease;
         }
 
+        /* время сбора — рядом с датой */
+        .gathering-time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(0.8rem, 1.8vw, 1rem);
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
+            margin-top: 8px;
+            display: block;
+            width: 100%;
+        }
+        .gathering-time.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gathering-time span {
+            display: inline-block;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+            padding: 4px 16px;
+            font-weight: 300;
+        }
+
         .greeting-title.visible,
         .save-the-date.visible,
         .description-text.visible {
@@ -934,6 +960,8 @@
         <div class="date-block">
             <span class="date-number from-left-1">15</span><span class="dot">.</span><span class="date-number from-right">08</span><span class="dot">.</span><span class="date-number from-left-2">2026</span>
         </div>
+        <!-- ВРЕМЯ СБОРА ГОСТЕЙ РЯДОМ С ДАТОЙ -->
+        <div class="gathering-time" id="gatheringTime"><span>Сбор гостей в 13:00</span></div>
         <div class="line line-bottom"></div>
     </div>
 </div>
@@ -1059,7 +1087,9 @@
                         setTimeout(() => document.querySelector('.line-top')?.classList.add('visible'), 700);
                         setTimeout(() => document.querySelectorAll('.date-number').forEach(el => el.classList.add('visible')), 1000);
                         setTimeout(() => document.querySelectorAll('.dot').forEach(el => el.classList.add('visible')), 1300);
-                        setTimeout(() => document.querySelector('.line-bottom')?.classList.add('visible'), 1600);
+                        // появление времени сбора
+                        setTimeout(() => document.getElementById('gatheringTime')?.classList.add('visible'), 1500);
+                        setTimeout(() => document.querySelector('.line-bottom')?.classList.add('visible'), 1800);
                         observer.disconnect();
                     }
                 });
@@ -1108,7 +1138,7 @@
                     if (entry.isIntersecting) {
                         document.getElementById('programTitle')?.classList.add('visible');
                         document.getElementById('programTagline')?.classList.add('visible');
-                        
+
                         const delays = [0, 500, 1000, 250, 750, 1250];
                         galleryCards.forEach((card, i) => {
                             setTimeout(() => {
