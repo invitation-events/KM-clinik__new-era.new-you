@@ -56,7 +56,7 @@
             background-color: #0a0a0a;
         }
 
-        /* ----- ПЕРВЫЙ ЭКРАН (100% высоты экрана на всех устройствах) ----- */
+        /* ----- ПЕРВЫЙ ЭКРАН ----- */
         .first-screen {
             position: relative;
             width: 100%;
@@ -398,7 +398,7 @@
             opacity: 1;
         }
 
-        /* ----- ЛОКАЦИЯ С ФОТО ----- */
+        /* ----- ЛОКАЦИЯ ----- */
         .location-section {
             position: relative;
             padding: 40px 25px;
@@ -618,7 +618,7 @@
             }
         }
 
-        /* ----- ПРОГРАММА (ГАЛЕРЕЯ) ----- */
+        /* ----- ПРОГРАММА ----- */
         .program-screen {
             background: #fff;
             padding: 35px 16px 45px;
@@ -755,7 +755,7 @@
             .gallery-card.card-right-bottom { width: 36%; height: 34%; bottom: 2%; right: 2%; }
         }
 
-        /* ----- АНКЕТА ГОСТЯ ----- */
+        /* ----- АНКЕТА ----- */
         .rsvp-screen {
             background: #ffffff;
             padding: 40px 20px;
@@ -926,57 +926,75 @@
             padding: 0 1rem;
         }
 
-        /* ----- ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ С ИСЧЕЗАЮЩЕЙ ЛИНИЕЙ ----- */
-        .toast-notification {
+        /* ========================================
+           УВЕДОМЛЕНИЕ ПО ЦЕНТРУ, БЕЛЫЙ ФОН, УВЕЛИЧЕННОЕ
+           ======================================== */
+        .toast-overlay {
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(120px);
-            background: #1a1a1a;
-            color: #fff;
-            padding: 22px 32px 18px;
-            border-radius: 4px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            z-index: 1000;
-            text-align: center;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
-            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.1);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            min-width: 280px;
-            max-width: 90%;
             pointer-events: none;
-            border-left: 3px solid #fff;
+            transition: opacity 0.5s ease;
         }
 
-        .toast-notification.show {
+        .toast-overlay.show {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
             pointer-events: auto;
         }
 
-        .toast-notification .toast-title {
-            font-weight: 600;
-            letter-spacing: 1px;
+        .toast-modal {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 48px 40px 40px;
+            max-width: 440px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+        }
+
+        .toast-overlay.show .toast-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .toast-modal .toast-icon {
+            font-size: 48px;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
         }
 
-        .toast-notification .toast-sub {
-            font-size: 12px;
+        .toast-modal .toast-title {
+            font-family: 'Lighthaus', 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .toast-modal .toast-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
             font-weight: 300;
-            color: #aaa;
-            letter-spacing: 1px;
+            color: #666;
+            display: block;
+            margin-bottom: 20px;
         }
 
-        /* Исчезающая линия-индикатор */
+        /* Исчезающая линия */
         .toast-timer-bar {
             width: 100%;
             height: 2px;
-            background: rgba(255, 255, 255, 0.15);
-            margin-top: 14px;
+            background: #e8e8e8;
             border-radius: 2px;
             overflow: hidden;
             position: relative;
@@ -985,7 +1003,7 @@
         .toast-timer-bar .timer-fill {
             height: 100%;
             width: 100%;
-            background: #ffffff;
+            background: #1a1a1a;
             border-radius: 2px;
             transition: width 5s linear;
         }
@@ -995,19 +1013,24 @@
         }
 
         @media (max-width: 480px) {
-            .toast-notification {
-                padding: 16px 20px 14px;
-                font-size: 12px;
-                min-width: 200px;
-                bottom: 20px;
+            .toast-modal {
+                padding: 32px 24px 28px;
             }
-            .toast-timer-bar {
-                margin-top: 10px;
+            .toast-modal .toast-title {
+                font-size: 18px;
+            }
+            .toast-modal .toast-sub {
+                font-size: 12px;
+            }
+            .toast-modal .toast-icon {
+                font-size: 36px;
             }
         }
     </style>
 </head>
 <body>
+
+<!-- ====== ОСНОВНОЙ КОНТЕНТ ====== -->
 
 <div class="first-screen" id="firstScreen">
     <div class="photo-bg" id="photoBg"></div>
@@ -1036,7 +1059,6 @@
     </div>
 </div>
 
-<!-- ЛОКАЦИЯ С ФОТО -->
 <div class="location-section" id="locationSection">
     <div class="location-bg"></div>
     <div class="location-content">
@@ -1048,11 +1070,9 @@
     </div>
 </div>
 
-<!-- СПИКЕРЫ -->
 <div class="speakers-screen" id="speakersScreen">
     <div class="speakers-container">
         <h2 class="speakers-title" id="speakersTitle">Спикеры</h2>
-
         <div class="speaker-card" id="speaker1">
             <div class="speaker-name">Екатерина Могильницкая</div>
             <div class="speaker-role">Основатель клиники KM+clinic; врач-дерматолог, косметолог, трихолог</div>
@@ -1062,7 +1082,6 @@
                 Какие новинки косметологии — лишь тренд, а что действительно работает.
             </div>
         </div>
-
         <div class="speaker-card" id="speaker2">
             <div class="speaker-name">Анастасия Кургиниан</div>
             <div class="speaker-role">Холистический подход к здоровью; врач-нутрициолог, энергокоуч</div>
@@ -1078,12 +1097,10 @@
     </div>
 </div>
 
-<!-- ПРОГРАММА (ГАЛЕРЕЯ) -->
 <div class="program-screen" id="programScreen">
     <div class="program-container">
         <h1 class="program-title" id="programTitle">Программа</h1>
         <p class="program-tagline" id="programTagline">girls • dj • ice cream • prosecco</p>
-
         <div class="gallery-grid" id="galleryGrid">
             <div class="gallery-card card-center" style="background-image: url('image_2026-08-02_18-40-47.png');"></div>
             <div class="gallery-card card-left-top" style="background-image: url('image_2026-08-02_18-50-28.png');"></div>
@@ -1095,7 +1112,6 @@
     </div>
 </div>
 
-<!-- АНКЕТА ГОСТЯ -->
 <div class="rsvp-screen" id="rsvpScreen">
     <div class="rsvp-container">
         <h2 class="rsvp-title">Анкета гостя</h2>
@@ -1121,19 +1137,21 @@
     </div>
 </div>
 
-<!-- ФУТЕР -->
 <footer class="footer">
     <div class="container">
         <p class="footer-text">KM+ clinic // new era. new you.</p>
     </div>
 </footer>
 
-<!-- ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ С ЛИНИЕЙ -->
-<div class="toast-notification" id="toastNotification">
-    <span class="toast-title">✓ Анкета отправлена</span>
-    <span class="toast-sub">Спасибо! Ждём вас на мероприятии</span>
-    <div class="toast-timer-bar">
-        <div class="timer-fill" id="timerFill"></div>
+<!-- ====== УВЕДОМЛЕНИЕ ПО ЦЕНТРУ, БЕЛЫЙ ФОН ====== -->
+<div class="toast-overlay" id="toastOverlay">
+    <div class="toast-modal">
+        <span class="toast-icon">✓</span>
+        <span class="toast-title">Анкета отправлена</span>
+        <span class="toast-sub">Спасибо! Ждём вас на мероприятии</span>
+        <div class="toast-timer-bar">
+            <div class="timer-fill" id="timerFill"></div>
+        </div>
     </div>
 </div>
 
@@ -1215,7 +1233,6 @@
                     if (entry.isIntersecting) {
                         document.getElementById('programTitle')?.classList.add('visible');
                         document.getElementById('programTagline')?.classList.add('visible');
-
                         const delays = [0, 500, 1000, 250, 750, 1250];
                         galleryCards.forEach((card, i) => {
                             setTimeout(() => {
@@ -1229,7 +1246,7 @@
             pObs.observe(programScreen);
         }
 
-        // АНКЕТА ГОСТЯ
+        // АНКЕТА
         const rsvpScreen = document.getElementById('rsvpScreen');
         if (rsvpScreen) {
             const rsvpObserver = new IntersectionObserver((entries) => {
@@ -1259,26 +1276,38 @@
             document.getElementById('secondScreen')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
-        // ФОРМА + ТОСТ С ЛИНИЕЙ
-        const form = document.getElementById('guestForm');
-        const toast = document.getElementById('toastNotification');
+        // ============================================
+        // ТОСТ ПО ЦЕНТРУ — ПОКАЗ И СКРЫТИЕ
+        // ============================================
+        const overlay = document.getElementById('toastOverlay');
         const timerFill = document.getElementById('timerFill');
+        let toastTimeout = null;
 
         function showToast() {
-            toast.classList.add('show');
-            // Сбрасываем и запускаем анимацию
+            // Сбрасываем предыдущий таймер
+            if (toastTimeout) {
+                clearTimeout(toastTimeout);
+                toastTimeout = null;
+            }
+
+            // Показываем оверлей
+            overlay.classList.add('show');
+
+            // Сбрасываем и запускаем анимацию линии
             timerFill.classList.remove('shrink');
-            // Небольшая задержка для перезапуска анимации
             void timerFill.offsetWidth;
             timerFill.classList.add('shrink');
 
-            // Через 5 секунд скрываем тост
-            setTimeout(() => {
-                toast.classList.remove('show');
+            // Через 5 секунд скрываем
+            toastTimeout = setTimeout(() => {
+                overlay.classList.remove('show');
                 timerFill.classList.remove('shrink');
+                toastTimeout = null;
             }, 5000);
         }
 
+        // ФОРМА
+        const form = document.getElementById('guestForm');
         if (form) {
             form.addEventListener('submit', function(e) {
                 const nameInput = document.getElementById('guestName');
@@ -1312,7 +1341,7 @@
             });
         }
 
-        // Если на страницу пришли с success=true
+        // Если success в URL
         if (window.location.search.includes('success=true') || window.location.search.includes('success')) {
             const form = document.getElementById('guestForm');
             if (form) {
